@@ -1,7 +1,5 @@
 import { useAppContext } from '../context/appContext';
 import { useToggleSidebar } from '../hooks/index';
-import { NavLink } from 'react-router-dom';
-import links from '../utils/links';
 import Wrapper from '../assets/Wrapper/SidebarWrapper';
 import SidebarLinks from './SidebarLinks';
 
