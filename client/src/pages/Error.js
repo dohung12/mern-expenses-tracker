@@ -6,14 +6,13 @@ const Error = () => {
       <div>
         <img src={img} alt='error' />
         <div className='grid'>
-          <div>
-            <h3>Page not found</h3>
-            <p>We can't find the page you are looking for.</p>
-          </div>
-
-          <a href='/' role={'button'} className='outline'>
+          <a href='/' role={'button'} className='outline btn'>
             Back home
           </a>
+          <hgroup>
+            <h3>Page not found</h3>
+            <p>We can't find the page you are looking for.</p>
+          </hgroup>
         </div>
       </div>
     </Wrapper>

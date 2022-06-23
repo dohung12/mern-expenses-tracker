@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import img from '../assets/images/login.svg';
 import Wrapper from '../assets/Wrapper/LoginPageWrapper';
@@ -11,7 +12,7 @@ const Login = () => {
   const [values, setValues] = useState(initUserState);
   const navigate = useNavigate();
   const { email, password } = values;
-
+  const [isLoading, setIsLoading] = useState(false);
   /**
    * HANDLE FORM INPUT CHANGES
    */
@@ -36,44 +37,42 @@ const Login = () => {
   return (
     <Wrapper className='container'>
       <article className='grid'>
-        {!user && (
-          <form action=''>
-            <h1>Login</h1>
+        <form action=''>
+          <h1>Login</h1>
 
-            <input
-              inputType='email'
-              name={'email'}
-              value={email}
-              placeholder='Email'
-              onChange={handleChange}
-            />
+          <input
+            inputType='email'
+            name={'email'}
+            value={email}
+            placeholder='Email'
+            onChange={handleChange}
+          />
 
-            <input
-              inputType='password'
-              name={'password'}
-              value={password}
-              placeholder='Password'
-              onChange={handleChange}
-            />
+          <input
+            inputType='password'
+            name={'password'}
+            value={password}
+            placeholder='Password'
+            onChange={handleChange}
+          />
 
-            <p
-              style={{
-                textAlign: 'end',
-              }}
-            >
-              Not a member?
-              <a href='/register'> Register</a>
-            </p>
-            <button
-              type='submit'
-              className='contrast'
-              onClick={handleSubmit}
-              disabled={isLoading}
-            >
-              {isLoading ? 'Submitting ...' : 'Submit'}
-            </button>
-          </form>
-        )}
+          <p
+            style={{
+              textAlign: 'end',
+            }}
+          >
+            Not a member?
+            <a href='/register'> Register</a>
+          </p>
+          <button
+            type='submit'
+            className='contrast'
+            onClick={handleSubmit}
+            disabled={isLoading}
+          >
+            {isLoading ? 'Submitting ...' : 'Submit'}
+          </button>
+        </form>
         <div className='img-block'>
           <img src={img} alt='register' />
         </div>

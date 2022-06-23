@@ -11,9 +11,15 @@ const Wrapper = styled.main`
     display: block;
     margin-bottom: 2rem;
   }
-
-  h3 {
-    margin-bottom: 0;
+  .btn {
+    height: fit-content;
+    width: fit-content;
+  }
+  .grid {
+    justify-items: center;
+    @media (min-width: 992px) {
+      grid-template-columns: auto 1fr;
+    }
   }
 `;
 
