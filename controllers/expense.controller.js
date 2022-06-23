@@ -16,7 +16,13 @@ const getSingleExpense = async (req, res) => {
 };
 
 const getAllExpense = async (req, res) => {
-  res.send('get all expenses');
+  const { userId } = req.user;
+
+  const expenses = await ExpenseSchema.find({ createdBy: userId });
+  res.status(StatusCodes.OK).json({
+    count: expenses.length,
+    expenses,
+  });
 };
 
 const createExpense = async (req, res) => {

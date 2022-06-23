@@ -8,6 +8,7 @@ import SidebarLinks from './SidebarLinks';
 import Avatar from './Avatar';
 import FormRow from './FormRow';
 import SingleExpense from './SingleExpense';
+import ExpensesContainer from './ExpensesContainer';
 export {
   Logo,
   PublicNavbar,
@@ -19,4 +20,5 @@ export {
   Avatar,
   FormRow,
   SingleExpense,
+  ExpensesContainer,
 };
