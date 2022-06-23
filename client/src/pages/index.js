@@ -12,6 +12,7 @@ import Stats from './Stats';
 import PrivateRouteLayout from './PrivateRouteLayout';
 import PrivateRouteProtector from './PrivateRouteProtector';
 import LogOut from './LogOut';
+import Password from './Password';
 export {
   Landing,
   Register,
@@ -26,4 +27,5 @@ export {
   PrivateRouteLayout,
   PrivateRouteProtector,
   LogOut,
+  Password,
 };

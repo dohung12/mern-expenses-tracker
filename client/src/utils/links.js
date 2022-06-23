@@ -1,6 +1,11 @@
 import { MdDashboard, MdLogout } from 'react-icons/md';
 import { ImProfile } from 'react-icons/im';
-import { FaMoneyCheck, FaPlusSquare, FaChartArea } from 'react-icons/fa';
+import {
+  FaMoneyCheck,
+  FaPlusSquare,
+  FaChartArea,
+  FaLock,
+} from 'react-icons/fa';
 const links = [
   {
     id: 1,
@@ -36,6 +41,12 @@ const links = [
   },
   {
     id: 6,
+    text: 'Change Password',
+    path: 'password',
+    icon: <FaLock />,
+  },
+  {
+    id: 7,
     text: 'Log Out',
     path: 'logout',
     icon: <MdLogout />,

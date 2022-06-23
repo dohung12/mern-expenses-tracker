@@ -13,6 +13,7 @@ import {
   Profile,
   Stats,
   LogOut,
+  Password,
 } from './pages/';
 function App() {
   return (
@@ -37,6 +38,7 @@ function App() {
           <Route path='/profile' element={<Profile />}></Route>
           <Route path='/stats' element={<Stats />}></Route>
           <Route path='/logout' element={<LogOut />}></Route>
+          <Route path='/password' element={<Password />}></Route>
         </Route>
       </Routes>
     </BrowserRouter>
