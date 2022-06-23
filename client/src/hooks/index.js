@@ -1,3 +1,3 @@
 import useAlert from './useAlert';
-
-export { useAlert };
+import useSetupUser from './useSetupUser';
+export { useAlert, useSetupUser };

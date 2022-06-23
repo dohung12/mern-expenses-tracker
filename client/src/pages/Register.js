@@ -7,7 +7,7 @@ import { Alert } from '../components/';
 import { useAppContext } from '../context/appContext';
 import { useNavigate } from 'react-router-dom';
 import { addToLocalStorage } from '../utils/localStorage';
-import { useAlert } from '../hooks/';
+import { useAlert, useSetupUser } from '../hooks/';
 
 const initUserState = {
   username: '',
@@ -21,6 +21,8 @@ const Register = () => {
   const [alert, displayAlert] = useAlert();
 
   const navigate = useNavigate();
+  const setupUser = useSetupUser();
+
   const { state, dispatch } = useAppContext();
   const { user } = state;
 
@@ -48,15 +50,7 @@ const Register = () => {
       const { data } = await axios.post('/api/v1/auth/register', currentUser);
       const { user, token } = data;
       // save data to global context
-      dispatch({
-        type: 'SETUP_USER',
-        payload: {
-          user,
-          token,
-        },
-      });
-      // save data to local storage
-      addToLocalStorage(user, token);
+      setupUser({ user, token });
       // display alert
       displayAlert('Register success!', 'success');
     } catch (error) {
@@ -90,7 +84,7 @@ const Register = () => {
 
   useEffect(() => {
     if (user) {
-      setTimeout(() => navigate('/'), 3000);
+      setTimeout(() => navigate('/'), 2000);
     }
   }, [user, navigate]);
 
