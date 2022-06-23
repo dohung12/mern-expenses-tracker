@@ -1,4 +1,4 @@
-import { MdDashboard } from 'react-icons/md';
+import { MdDashboard, MdLogout } from 'react-icons/md';
 import { ImProfile } from 'react-icons/im';
 import { FaMoneyCheck, FaPlusSquare, FaChartArea } from 'react-icons/fa';
 const links = [
@@ -33,6 +33,12 @@ const links = [
     text: 'Stats',
     path: 'stats',
     icon: <FaChartArea />,
+  },
+  {
+    id: 6,
+    text: 'Log Out',
+    path: 'logout',
+    icon: <MdLogout />,
   },
 ];
 

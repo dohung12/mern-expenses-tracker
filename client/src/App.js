@@ -12,6 +12,7 @@ import {
   PrivateRouteProtector,
   Profile,
   Stats,
+  LogOut,
 } from './pages/';
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
           <Route path='/all-expenses' element={<AllExpenses />}></Route>
           <Route path='/profile' element={<Profile />}></Route>
           <Route path='/stats' element={<Stats />}></Route>
+          <Route path='/logout' element={<LogOut />}></Route>
         </Route>
       </Routes>
     </BrowserRouter>
