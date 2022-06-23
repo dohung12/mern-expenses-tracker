@@ -41,7 +41,7 @@ const Login = () => {
           <h1>Login</h1>
 
           <input
-            inputType='email'
+            type='email'
             name={'email'}
             value={email}
             placeholder='Email'
@@ -49,7 +49,7 @@ const Login = () => {
           />
 
           <input
-            inputType='password'
+            type='password'
             name={'password'}
             value={password}
             placeholder='Password'

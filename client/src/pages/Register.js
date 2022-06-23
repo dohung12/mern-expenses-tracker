@@ -37,14 +37,14 @@ const Register = () => {
           <form action=''>
             <div className='grid'>
               <input
-                inputType='text'
+                type='text'
                 name={'username'}
                 value={username}
                 placeholder='Username'
                 onChange={handleChange}
               />
               <input
-                inputType='email'
+                type='email'
                 name={'email'}
                 value={email}
                 placeholder='Email'
@@ -53,14 +53,14 @@ const Register = () => {
             </div>
 
             <input
-              inputType='password'
+              type='password'
               name={'password'}
               value={password}
               placeholder='Password'
               onChange={handleChange}
             />
             <input
-              inputType='password'
+              type='password'
               name={'confirmedPassword'}
               value={confirmedPassword}
               placeholder='Confirm Password'

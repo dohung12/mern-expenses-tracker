@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 const Wrapper = styled.main`
   margin-top: 2rem;
+  height: calc(100vh - 4rem);
+  overflow: hidden;
 
   .img-block {
     img {
