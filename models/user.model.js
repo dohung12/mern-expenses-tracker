@@ -18,6 +18,11 @@ const UserSchema = new mongoose.Schema({
     required: [true, 'Please provide password'],
     select: false,
   },
+  profilePic: {
+    type: String,
+    default:
+      'https://res.cloudinary.com/dbvndh29t/image/upload/v1654756837/odin-book/profile-silhouette_pxt7tz.jpg',
+  },
 });
 
 UserSchema.pre('save', async function () {

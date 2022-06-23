@@ -7,9 +7,11 @@ const logger = require('morgan');
 // passport auth
 const passport = require('passport');
 require('./config/passport')(passport);
-
 // connect to database
 require('./config/database');
+// connect to media database
+const fileUpload = require('express-fileupload');
+require('./config/cloudinary');
 
 // middleware
 const verifyUser = require('./middleware/verifyUser');
@@ -17,12 +19,14 @@ const notFoundMiddleware = require('./middleware/not-found');
 // routes
 const authRoutes = require('./routes/auth.route');
 const expensesRoutes = require('./routes/expense.route');
+const uploadRoutes = require('./routes/upload.route');
 
 const app = express();
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(fileUpload({ useTempFiles: true }));
 app.use(passport.initialize());
 
 // app.use('/', (req, res) => {
