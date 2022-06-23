@@ -4,9 +4,8 @@ import { useAppContext } from '../context/appContext';
 import { useToggleSidebar } from '../hooks/index';
 
 // import LogoutBtn from './LogoutBtn';
-// import Avatar from './Avatar';
 // import SearchForm from './SearchForm';
-import Logo from './Logo';
+import { Logo, Avatar } from './index';
 
 import Wrapper from '../assets/Wrapper/PrivateNavbarWrapper';
 import links from '../utils/links';
@@ -41,7 +40,7 @@ const PrivNavBar = () => {
           <details role={'list'} dir='rtl'>
             {/* eslint-disable-next-line */}
             <summary aria-haspopup='listbox' role={'link'}>
-              {/* <Avatar src={state.user.profilePic} /> */}
+              <Avatar src={state.user.profilePic} />
               <h5>{username}</h5>
             </summary>
             <ul role={'listbox'}>

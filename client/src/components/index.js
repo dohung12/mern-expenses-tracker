@@ -5,6 +5,7 @@ import SmallSidebar from './SmallSidebar';
 import Sidebar from './Sidebar';
 import PrivateNavbar from './PrivateNavbar';
 import SidebarLinks from './SidebarLinks';
+import Avatar from './Avatar';
 export {
   Logo,
   PublicNavbar,
@@ -13,4 +14,5 @@ export {
   Sidebar,
   PrivateNavbar,
   SidebarLinks,
+  Avatar,
 };
