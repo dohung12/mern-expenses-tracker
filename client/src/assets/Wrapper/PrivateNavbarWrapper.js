@@ -4,6 +4,14 @@ const Wrapper = styled.nav`
   box-shadow: rgb(0 0 0 / 10%) 0px 1px 0px 0px;
   background-color: #fff;
 
+  .toggle-btn {
+    border-color: var(--muted-color);
+    svg {
+      width: 1.5rem;
+      height: auto;
+      color: var(--muted-color);
+    }
+  }
   li {
     padding: 0;
     .active {

@@ -22,7 +22,7 @@ const PrivNavBar = () => {
         <li>
           <div
             role={'button'}
-            className='outline contrast'
+            className=' outline toggle-btn'
             onClick={toggleSidebar}
           >
             <FaAlignLeft />
@@ -39,6 +39,7 @@ const PrivNavBar = () => {
       <ul>
         <li>
           <details role={'list'} dir='rtl'>
+            {/* eslint-disable-next-line */}
             <summary aria-haspopup='listbox' role={'link'}>
               {/* <Avatar src={state.user.profilePic} /> */}
               <h5>{username}</h5>
