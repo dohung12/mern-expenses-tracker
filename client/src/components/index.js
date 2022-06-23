@@ -7,6 +7,7 @@ import PrivateNavbar from './PrivateNavbar';
 import SidebarLinks from './SidebarLinks';
 import Avatar from './Avatar';
 import FormRow from './FormRow';
+import SingleExpense from './SingleExpense';
 export {
   Logo,
   PublicNavbar,
@@ -17,4 +18,5 @@ export {
   SidebarLinks,
   Avatar,
   FormRow,
+  SingleExpense,
 };
