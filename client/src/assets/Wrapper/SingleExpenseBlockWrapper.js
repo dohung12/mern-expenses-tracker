@@ -6,7 +6,7 @@ const Wrapper = styled.details`
   border-radius: 0.5rem;
   summary {
     display: grid;
-    grid-template-columns: 100px 1fr auto;
+    grid-template-columns: 200px 1fr auto;
     gap: 1rem;
     .title {
       margin-bottom: 0;
