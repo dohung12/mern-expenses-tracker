@@ -1,7 +1,8 @@
 import { useAppContext } from '../context/appContext';
 import { useToggleSidebar } from '../hooks/index';
+
 import Wrapper from '../assets/Wrapper/SidebarWrapper';
-import SidebarLinks from './SidebarLinks';
+import { SidebarLinks } from './index';
 
 const Sidebar = () => {
   const { state } = useAppContext();
@@ -21,7 +22,6 @@ const Sidebar = () => {
             <h3>Settings</h3>
             <SidebarLinks toggleSidebar={toggleSidebar} />
           </div>
-          {/* <LogoutBtn displayIcon={true} /> */}
         </div>
       </div>
     </Wrapper>
