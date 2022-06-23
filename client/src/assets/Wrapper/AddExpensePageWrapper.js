@@ -4,7 +4,8 @@ const Wrapper = styled.div`
   padding: 3rem;
   border-radius: 0.5rem;
   background-color: #fff;
-
+  width: 80%;
+  margin: auto;
   label {
     text-transform: capitalize;
   }

@@ -89,6 +89,9 @@ const AddExpense = () => {
             value={category}
             required
           />
+        </div>
+
+        <div className='grid'>
           <FormRow
             name={'amount'}
             handleChange={handleChange}
@@ -98,9 +101,6 @@ const AddExpense = () => {
             value={amount}
             required
           />
-        </div>
-
-        <div className='grid'>
           <FormRow
             name={'incurred_on_date'}
             handleChange={handleChange}
