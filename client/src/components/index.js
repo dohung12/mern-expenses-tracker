@@ -6,6 +6,7 @@ import Sidebar from './Sidebar';
 import PrivateNavbar from './PrivateNavbar';
 import SidebarLinks from './SidebarLinks';
 import Avatar from './Avatar';
+import FormRow from './FormRow';
 export {
   Logo,
   PublicNavbar,
@@ -15,4 +16,5 @@ export {
   PrivateNavbar,
   SidebarLinks,
   Avatar,
+  FormRow,
 };
