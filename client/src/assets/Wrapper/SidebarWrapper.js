@@ -44,6 +44,7 @@ const Wrapper = styled.aside`
         color: var(--primary);
       }
     }
+
     .nav-link {
       display: flex;
       align-items: center;
@@ -63,6 +64,16 @@ const Wrapper = styled.aside`
     }
     .nav-link:hover .icon svg {
       color: var(--primary);
+    }
+    .nav-link:last-of-type {
+      border-top: 1px solid #ccc;
+      :hover {
+        background-color: var(--red-light);
+        color: var(--red-dark);
+        svg {
+          color: var(--red-dark);
+        }
+      }
     }
     .icon {
       font-size: 1.5rem;

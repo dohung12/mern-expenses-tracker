@@ -42,6 +42,13 @@ const Wrapper = styled.nav`
     }
   }
 
+  .nav-link:last-of-type {
+    border-top: 1px solid #ccc;
+    svg {
+      color: var(--red-dark);
+    }
+  }
+
   summary {
     display: flex;
     align-items: center;
