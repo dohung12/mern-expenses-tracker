@@ -1,4 +1,4 @@
 import Logo from './Logo';
 import PublicNavbar from './PublicNavbar';
-
-export { Logo, PublicNavbar };
+import Alert from './Alert';
+export { Logo, PublicNavbar, Alert };

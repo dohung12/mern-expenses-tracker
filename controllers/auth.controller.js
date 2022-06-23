@@ -39,7 +39,6 @@ const register = async (req, res) => {
   // check if input value is empty
   if (!username || !email || !password) {
     res.status(StatusCodes.BAD_REQUEST).json({
-      success: false,
       msg: 'Please provide all values',
     });
   }
@@ -48,7 +47,6 @@ const register = async (req, res) => {
   const userAlreadyExist = await UserSchema.findOne({ email });
   if (userAlreadyExist) {
     res.status(StatusCodes.BAD_REQUEST).json({
-      success: false,
       msg: 'Email already in use',
     });
   }
@@ -58,7 +56,6 @@ const register = async (req, res) => {
   user.password = undefined;
   const token = user.createJWT();
   res.status(StatusCodes.OK).json({
-    success: true,
     user,
     token,
   });
