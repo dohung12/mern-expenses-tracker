@@ -6,7 +6,7 @@ const Error = () => {
       <div>
         <img src={img} alt='error' />
         <div className='grid'>
-          <a href='/' role={'button'} className='outline btn'>
+          <a href='/' role={'button'} className='btn'>
             Back home
           </a>
           <hgroup>
