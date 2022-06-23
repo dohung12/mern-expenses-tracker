@@ -1,3 +1,4 @@
 import useAlert from './useAlert';
 import useSetupUser from './useSetupUser';
-export { useAlert, useSetupUser };
+import useToggleSidebar from './useToggleSidebar';
+export { useAlert, useSetupUser, useToggleSidebar };
