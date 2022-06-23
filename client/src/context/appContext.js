@@ -9,6 +9,7 @@ const initialState = {
   user: JSON.parse(user) || null,
   token: token || null,
   showSidebar: false,
+  expenses: [],
 };
 
 const AppContext = createContext(initialState);

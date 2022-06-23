@@ -23,6 +23,12 @@ function reducer(state, action) {
         ...state,
         user: action.payload.user,
       };
+    case 'SETUP_EXPENSES':
+      const { expenses } = action.payload;
+      return {
+        ...state,
+        expenses,
+      };
     default:
       throw new Error(`Action type: ${action.type} does not exist`);
   }
