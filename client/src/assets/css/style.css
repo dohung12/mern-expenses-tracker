@@ -57,3 +57,8 @@
   color: var(--green-dark);
   background: var(--green-light);
 }
+
+svg {
+  width: 1.5rem;
+  height: 1.5rem;
+}
