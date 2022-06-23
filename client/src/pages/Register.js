@@ -6,7 +6,6 @@ import axios from 'axios';
 import { Alert } from '../components/';
 import { useAppContext } from '../context/appContext';
 import { useNavigate } from 'react-router-dom';
-import { addToLocalStorage } from '../utils/localStorage';
 import { useAlert, useSetupUser } from '../hooks/';
 
 const initUserState = {
@@ -23,7 +22,7 @@ const Register = () => {
   const navigate = useNavigate();
   const setupUser = useSetupUser();
 
-  const { state, dispatch } = useAppContext();
+  const { state } = useAppContext();
   const { user } = state;
 
   const { username, email, password, confirmedPassword } = values;
