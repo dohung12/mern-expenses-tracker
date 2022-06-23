@@ -1,4 +1,3 @@
-import React from 'react';
 import { useAppContext } from '../context/appContext';
 import { removeFromLocalStorage } from '../utils/localStorage';
 import { useNavigate } from 'react-router-dom';
