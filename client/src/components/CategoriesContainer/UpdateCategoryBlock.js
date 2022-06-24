@@ -27,6 +27,7 @@ const UpdateCategoryBlock = () => {
       });
       displayAlert('Update Category Successful', 'success');
       getCategories();
+      setNewTitle('');
     } catch (error) {
       console.log(error);
       displayAlert(error.response.data.msg, 'danger');

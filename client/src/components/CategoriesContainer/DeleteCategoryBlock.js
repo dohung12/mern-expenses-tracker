@@ -49,7 +49,12 @@ const DeleteCategoryBlock = () => {
             );
           })}
         </select>
-        <button type='submit' disabled={isLoading} aria-busy={isLoading}>
+        <button
+          type='submit'
+          className='contrast'
+          disabled={isLoading}
+          aria-busy={isLoading}
+        >
           {!isLoading && 'Delete'}
         </button>
       </form>
