@@ -21,6 +21,7 @@ const authRoutes = require('./routes/auth.route');
 const expensesRoutes = require('./routes/expense.route');
 const uploadRoutes = require('./routes/upload.route');
 const userRoutes = require('./routes/user.route');
+const categoryRoutes = require('./routes/category.route');
 
 const app = express();
 app.use(logger('dev'));
@@ -36,6 +37,7 @@ app.use(passport.initialize());
 app.use('/api/v1/auth', authRoutes);
 app.use('/api/v1/expenses', verifyUser, expensesRoutes);
 app.use('/api/v1/user', verifyUser, userRoutes);
+app.use('/api/v1/category', verifyUser, categoryRoutes);
 app.use('/api/v1/uploads', verifyUser, uploadRoutes);
 
 app.use(notFoundMiddleware);

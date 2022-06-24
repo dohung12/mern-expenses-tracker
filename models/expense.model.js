@@ -8,9 +8,9 @@ const ExpenseSchema = new mongoose.Schema(
       required: 'Title is required',
     },
     category: {
-      type: String,
-      trim: true,
-      required: 'Category is required',
+      type: mongoose.Types.ObjectId,
+      ref: 'Category',
+      required: 'Please provide category',
     },
     amount: {
       type: Number,
