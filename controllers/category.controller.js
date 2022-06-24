@@ -1,5 +1,6 @@
 const CategorySchema = require('../models/category.model');
 const { StatusCodes } = require('http-status-codes');
+const checkPermission = require('../utils/checkPermission');
 
 const createCategory = async (req, res) => {
   const { title } = req.body;
@@ -77,7 +78,7 @@ const deleteCategory = async (req, res) => {
   // success, remove category
   await category.remove();
   res.status(StatusCodes.OK).json({
-    msg: 'successful remove expense',
+    msg: 'successful remove category',
   });
 };
 
