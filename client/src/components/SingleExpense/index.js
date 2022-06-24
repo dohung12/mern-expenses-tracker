@@ -73,10 +73,10 @@ const SingleExpense = ({
   return (
     <>
       <Wrapper data-target={_id}>
-        <summary>
+        <hgroup>
           <h2 className='amount'>${amount}</h2>
-          <h4 className='title'>{title}</h4>
-        </summary>
+          <p className='title'>{title}</p>
+        </hgroup>
         <div className='info'>
           <ul>
             <li className='category'>{category.title}</li>

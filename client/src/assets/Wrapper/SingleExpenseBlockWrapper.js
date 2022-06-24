@@ -1,39 +1,25 @@
 import styled from 'styled-components';
 
-const Wrapper = styled.details`
-  border: 1px solid #ccc;
+const Wrapper = styled.div`
   padding: 1rem;
   border-radius: 0.5rem;
   background-color: #fff;
-  summary {
-    display: flex;
-    justify-content: space-between;
-    gap: 1rem;
-    flex-direction: column;
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
 
-    @media (min-width: 600px) {
-      flex-direction: row;
-    }
-
-    .title {
-      width: 100%;
-      margin-bottom: 0;
-      align-self: flex-end;
-    }
+  hgroup {
     .amount {
       color: var(--primary);
       margin-bottom: 0;
-
-      @media (min-width: 600px) {
-        width: 200px;
-        flex-direction: row;
-      }
+    }
+    .title {
+      width: 100%;
+      height: 3rem;
     }
   }
 
   .info {
-    display: grid;
-    grid-template-columns: 1fr auto;
+    display: flex;
+    justify-content: space-between;
     border-top: 1px solid #ccc;
     padding-top: 1rem;
     ul {
@@ -41,8 +27,6 @@ const Wrapper = styled.details`
     }
     .btn-container {
       display: flex;
-      justify-content: flex-end;
-      align-items: flex-end;
       flex-direction: column;
       gap: 0.5rem;
 
