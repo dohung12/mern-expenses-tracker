@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useAppContext } from '../context/appContext';
 import { useGetCategories, useGetExpenses } from '../hooks';
 import { SingleExpense } from './index';

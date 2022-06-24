@@ -22,7 +22,7 @@ const UpdateCategoryBlock = () => {
   const updateCategory = async () => {
     setIsLoading(true);
     try {
-      const { data } = await authFetch.patch(`/category/${categoryId}`, {
+      await authFetch.patch(`/category/${categoryId}`, {
         title: newTitle,
       });
       displayAlert('Update Category Successful', 'success');
