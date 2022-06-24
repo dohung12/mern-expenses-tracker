@@ -8,7 +8,7 @@ const createRandomExpense = () => {
     title: faker.lorem.sentence(),
     category: faker.helpers.arrayElement(['meals', 'groceries', 'commute']),
     amount: faker.finance.amount(),
-    incurred_on: faker.date.recent(),
+    incurred_on: faker.date.past(),
     notes: faker.lorem.words(),
     createdBy: '62b422d5e384f2fc811089e3',
   };
