@@ -30,7 +30,8 @@ const getAllExpense = async (req, res) => {
   const queryObj = { createdBy: req.user.userId };
 
   // get category id
-  if (category !== 'all') {
+
+  if (category && category !== 'all') {
     const result = await CategorySchema.findOne({ title: category });
     queryObj.category = result;
   }
