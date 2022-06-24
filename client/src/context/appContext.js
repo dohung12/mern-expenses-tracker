@@ -10,6 +10,7 @@ const initialState = {
   token: token || null,
   showSidebar: false,
   expenses: [],
+  categories: [],
 };
 
 const AppContext = createContext(initialState);

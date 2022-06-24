@@ -29,6 +29,12 @@ function reducer(state, action) {
         ...state,
         expenses,
       };
+    case 'SETUP_CATEGORIES':
+      const { categories } = action.payload;
+      return {
+        ...state,
+        categories,
+      };
     default:
       throw new Error(`Action type: ${action.type} does not exist`);
   }
