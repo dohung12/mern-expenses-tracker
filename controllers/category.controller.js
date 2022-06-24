@@ -35,6 +35,15 @@ const updateCategory = async (req, res) => {
       msg: 'Please provide all values',
     });
   }
+
+  // CHECK FOR UNIQUE
+  const isTitleBeingUsed = await CategorySchema.findOne({ title });
+  if (isTitleBeingUsed) {
+    res.status(StatusCodes.BAD_REQUEST).json({
+      msg: 'Already has category with the same name.',
+    });
+  }
+
   // find category
   const category = await CategorySchema.findById(categoryId);
   if (!category) {
