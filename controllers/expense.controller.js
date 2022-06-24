@@ -17,14 +17,100 @@ const getSingleExpense = async (req, res) => {
 };
 
 const getAllExpense = async (req, res) => {
-  const { userId } = req.user;
+  const {
+    title,
+    category,
+    incurred_on_from,
+    incurred_on_to,
+    amount_from,
+    amount_to,
+    sort,
+  } = req.query;
 
-  const expenses = await ExpenseSchema.find({ createdBy: userId }).populate(
-    'category'
-  );
+  const queryObj = { createdBy: req.user.userId };
+
+  // get category id
+  if (category !== 'all') {
+    const result = await CategorySchema.findOne({ title: category });
+    queryObj.category = result;
+  }
+  if (amount_from) {
+    queryObj.amount = {
+      $gte: amount_from,
+    };
+  }
+  if (amount_to) {
+    queryObj.amount = {
+      $lte: amount_to,
+    };
+  }
+  if (amount_from && amount_to) {
+    queryObj.amount = {
+      $gte: amount_from,
+      $lte: amount_to,
+    };
+  }
+
+  if (incurred_on_from) {
+    queryObj.incurred_on = {
+      $gte: incurred_on_from,
+    };
+  }
+  if (incurred_on_to) {
+    queryObj.incurred_on = {
+      $lte: incurred_on_to,
+    };
+  }
+  if (incurred_on_from && incurred_on_to) {
+    queryObj.amount = {
+      $gte: incurred_on_from,
+      $lte: incurred_on_to,
+    };
+  }
+  if (title) {
+    queryObj.title = {
+      $regex: title,
+      $options: 'i',
+    };
+  }
+
+  // // get result from db
+  let result = ExpenseSchema.find(queryObj);
+
+  // sort return values based on options
+  switch (sort) {
+    case 'latest':
+      result = result.sort('-createdAt');
+      break;
+    case 'oldest':
+      result = result.sort('createdAt');
+      break;
+    case 'a-z':
+      result = result.sort('title');
+      break;
+    case 'z-a':
+      result = result.sort('-title');
+      break;
+    default:
+      result = result.sort('-createdAt');
+      break;
+  }
+
+  const page = Number(req.query.page) || 1;
+  const limit = Number(req.query.limit) || 10;
+  const skip = (page - 1) * limit;
+
+  result = result.skip(skip).limit(limit);
+
+  const expenses = await result;
+
+  const totalExpenses = await ExpenseSchema.countDocuments(queryObj);
+  const numOfPages = Math.ceil(totalExpenses / limit);
+
   res.status(StatusCodes.OK).json({
-    count: expenses.length,
+    count: totalExpenses,
     expenses,
+    numOfPages,
   });
 };
 
