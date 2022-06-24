@@ -1,8 +1,11 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { FaPen, FaTrash } from 'react-icons/fa';
-import Wrapper from '../../assets/Wrapper/SingleExpenseBlockWrapper';
+import { useAuthFetch, useGetExpenses, useAlert } from '../../hooks/index';
+
 import DelConfirmModal from './DelConfirmModal';
-import { useAuthFetch, useGetExpenses } from '../../hooks/index';
+import EditFormModal from './EditFormModal';
+
+import Wrapper from '../../assets/Wrapper/SingleExpenseBlockWrapper';
 const SingleExpense = ({
   amount,
   category,
@@ -11,20 +14,47 @@ const SingleExpense = ({
   notes,
   _id,
 }) => {
-  const initState = { amount, category, incurred_on, title, notes };
+  const date = new Date(incurred_on);
+  const incurred_on_date = date.toISOString().substring(0, 10);
+  const incurred_on_time = date.toISOString().substring(11, 16);
+
   const [values, setValues] = useState({
-    ...initState,
+    amount,
+    category,
+    incurred_on_date,
+    incurred_on_time,
+    title,
+    notes,
     isLoading: false,
-    isEditing: false,
-    showModal: false,
+    showDelModal: false,
+    showEditModal: false,
   });
 
+  const [alert, displayAlert] = useAlert();
   const authFetch = useAuthFetch();
   const getExpenses = useGetExpenses();
 
-  // EDIT EXPENSE
-  const handleEditBtn = () => {
-    setValues({ ...values, isEditing: true });
+  // UPDATE EXPENSE
+  const updateExpense = async () => {
+    setValues({ ...values, isLoading: true });
+    try {
+      await authFetch.patch(`/expenses/${_id}`, {
+        ...values,
+        incurred_on: values.incurred_on_date + ' ' + values.incurred_on_time,
+      });
+      getExpenses();
+    } catch (error) {
+      console.log(error);
+    }
+    setValues({ ...values, isLoading: false, showEditModal: false });
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!title || !amount || !category) {
+      displayAlert('Please provide all required values', 'danger');
+    } else {
+      updateExpense();
+    }
   };
 
   // DELETE EXPENSE
@@ -36,14 +66,7 @@ const SingleExpense = ({
     } catch (error) {
       console.log(error);
     }
-    setValues({ ...values, isLoading: false, showModal: false });
-  };
-
-  const handleDelBtn = () => {
-    setValues({
-      ...values,
-      showModal: true,
-    });
+    setValues({ ...values, isLoading: false, showDelModal: false });
   };
 
   return (
@@ -60,26 +83,49 @@ const SingleExpense = ({
             {notes && <li className='notes'>{notes}</li>}
           </ul>
           <div className='btn-container'>
-            <div role={'button'} className='contrast' onClick={handleDelBtn}>
+            <div
+              role={'button'}
+              className='contrast'
+              onClick={() => {
+                setValues({
+                  ...values,
+                  showDelModal: true,
+                });
+              }}
+            >
               <FaTrash />
             </div>
-            <div role={'button'} onClick={handleEditBtn}>
+            <div
+              role={'button'}
+              onClick={() => {
+                setValues({ ...values, showEditModal: true });
+              }}
+            >
               <FaPen />
             </div>
           </div>
         </div>
       </Wrapper>
-      {values.showModal && (
+      {values.showDelModal && (
         <DelConfirmModal
-          showModal={values.showModal}
+          showModal={values.showDelModal}
           toggleShowModal={() => {
             setValues({
               ...values,
-              showModal: !values.showModal,
+              showDelModal: !values.showDelModal,
             });
           }}
           dataTarget={_id}
           onConfirm={handleRemoveExpense}
+        />
+      )}
+      {values.showEditModal && (
+        <EditFormModal
+          dataTarget={_id}
+          values={values}
+          setValues={setValues}
+          alert={alert}
+          handleSubmit={handleSubmit}
         />
       )}
     </>
