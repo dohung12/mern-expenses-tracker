@@ -20,11 +20,13 @@ const CreateCategoryBlock = () => {
       getCategories();
     } catch (error) {
       console.log(error);
+      displayAlert(error.response.data.msg, 'danger');
     }
     setIsLoading(false);
   };
 
-  const handleConfirm = () => {
+  const handleConfirm = (e) => {
+    e.preventDefault();
     if (!category) {
       displayAlert("Category's title must not be empty", 'danger');
     } else {
@@ -33,10 +35,10 @@ const CreateCategoryBlock = () => {
   };
 
   return (
-    <div>
-      <h3>Create new category</h3>
+    <div className='new-category'>
+      <h5 className='header'>Create new category</h5>
+      {showAlert && <Alert alertText={alertText} alertType={alertType} />}
       <form action=''>
-        {showAlert && <Alert alertText={alertText} alertType={alertType} />}
         <input
           type='text'
           name='category'
@@ -46,14 +48,9 @@ const CreateCategoryBlock = () => {
           }}
         />
 
-        <a
-          href='#confirm'
-          role='button'
-          aria-busy={isLoading}
-          onClick={handleConfirm}
-        >
+        <button aria-busy={isLoading} onClick={handleConfirm}>
           Confirm
-        </a>
+        </button>
       </form>
     </div>
   );

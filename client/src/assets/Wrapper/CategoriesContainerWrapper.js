@@ -13,6 +13,20 @@ const Wrapper = styled.details`
     margin-bottom: 0;
     display: inline-block;
   }
+
+  .new-category {
+    .header {
+      margin-bottom: 0.5rem;
+    }
+
+    form {
+      display: flex;
+      gap: 1rem;
+    }
+    button {
+      width: auto;
+    }
+  }
 `;
 
 export default Wrapper;
