@@ -64,14 +64,6 @@ const AddExpense = () => {
     }
   };
 
-  // CREATE NEW CATEGORY CONTROLLER
-  const toggleModal = () => {
-    setValues({
-      ...values,
-      showModal: !values.showModal,
-    });
-  };
-
   // FETCH CATEGORIES WHEN LOADING
   useEffect(() => {
     getCategories();
