@@ -10,6 +10,7 @@ import FormRow from './FormRow';
 import SingleExpense from './SingleExpense/';
 import ExpensesContainer from './ExpensesContainer';
 import SearchContainer from './SearchContainer';
+import Dropdown from './Dropdown';
 export {
   Logo,
   PublicNavbar,
@@ -23,4 +24,5 @@ export {
   SingleExpense,
   ExpensesContainer,
   SearchContainer,
+  Dropdown,
 };
