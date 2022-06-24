@@ -93,7 +93,7 @@ const deleteExpense = async (req, res) => {
       msg: 'Not authorized to access this route',
     });
   }
-  // success, update expense
+  // success, delete expense
   await expense.remove();
 
   res.status(StatusCodes.OK).json({
