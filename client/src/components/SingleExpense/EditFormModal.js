@@ -1,6 +1,4 @@
-import React from 'react';
 import { FormRow, Alert } from '../index';
-
 import Wrapper from '../../assets/Wrapper/EditFormModalWrapper';
 
 const EditFormModal = ({
