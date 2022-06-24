@@ -10,6 +10,14 @@ const createCategory = async (req, res) => {
     });
   }
 
+  // CHECK FOR UNIQUE
+  const isTitleBeingUsed = await CategorySchema.findOne({ title });
+  if (isTitleBeingUsed) {
+    res.status(StatusCodes.BAD_REQUEST).json({
+      msg: 'Already has category with the same name.',
+    });
+  }
+
   req.body.createdBy = req.user.userId;
   const category = await CategorySchema.create(req.body);
   res.status(StatusCodes.CREATED).json({
