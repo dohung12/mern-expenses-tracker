@@ -6,6 +6,10 @@ const Wrapper = styled.div`
   background-color: #fff;
   width: 80%;
   margin: auto;
+  h2 {
+    margin-bottom: 1rem;
+  }
+
   label {
     text-transform: capitalize;
   }

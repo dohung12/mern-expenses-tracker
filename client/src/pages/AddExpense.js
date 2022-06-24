@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { FormRow, Alert, Dropdown, AddCategoryModal } from '../components/';
+import { FormRow, Alert, Dropdown, CategoriesContainer } from '../components/';
 import { useAlert, useAuthFetch, useGetCategories } from '../hooks/index';
 import Wrapper from '../assets/Wrapper/AddExpensePageWrapper';
 import { useAppContext } from '../context/appContext';
@@ -81,6 +81,7 @@ const AddExpense = () => {
     <>
       <Wrapper data-target='add-expense-form'>
         {showAlert && <Alert alertText={alertText} alertType={alertType} />}
+        <h2>Create New Expense</h2>
         <form action='' onSubmit={handleSubmit}>
           <div className='grid'>
             <FormRow
@@ -136,23 +137,13 @@ const AddExpense = () => {
             key='notes'
             value={notes}
           />
-          <a href='#newCategory' onClick={toggleModal}>
-            Add new category
-          </a>
           <button type='submit' disabled={isLoading}>
             Submit
           </button>
         </form>
       </Wrapper>
 
-      {/* New Category Modal */}
-      {values.showModal && (
-        <AddCategoryModal
-          dataTarget={'add-expense-form'}
-          showModal={values.showModal}
-          toggleModal={toggleModal}
-        />
-      )}
+      <CategoriesContainer />
     </>
   );
 };
