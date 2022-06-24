@@ -62,7 +62,7 @@ const getAllExpense = async (req, res) => {
     };
   }
   if (incurred_on_from && incurred_on_to) {
-    queryObj.amount = {
+    queryObj.incurred_on = {
       $gte: incurred_on_from,
       $lte: incurred_on_to,
     };
