@@ -43,7 +43,14 @@ const initState = {
   amountTo: 0,
   sort: 'latest',
 };
-const sortOptions = ['latest', 'oldest', 'a-z', 'z-a'];
+const sortOptions = [
+  'latest',
+  'oldest',
+  'a-z',
+  'z-a',
+  'amount: low to high',
+  'amount: high to low',
+];
 
 const SearchContainer = () => {
   const { state } = useAppContext();

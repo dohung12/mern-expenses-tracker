@@ -51,7 +51,6 @@ const getAllExpense = async (req, res) => {
       $lte: amount_to,
     };
   }
-
   if (incurred_on_from) {
     queryObj.incurred_on = {
       $gte: incurred_on_from,
@@ -91,6 +90,12 @@ const getAllExpense = async (req, res) => {
       break;
     case 'z-a':
       result = result.sort('-title');
+      break;
+    case 'amount: low to high':
+      result = result.sort('amount');
+      break;
+    case 'amount: high to low':
+      result = result.sort('-amount');
       break;
     default:
       result = result.sort('-createdAt');
