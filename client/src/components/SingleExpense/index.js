@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { FaPen, FaTrash } from 'react-icons/fa';
 import { useAuthFetch, useGetExpenses, useAlert } from '../../hooks/index';
+import timeFormat from '../../utils/timeFormat';
 
 import DelConfirmModal from './DelConfirmModal';
 import EditFormModal from './EditFormModal';
@@ -79,7 +80,7 @@ const SingleExpense = ({
         <div className='info'>
           <ul>
             <li className='category'>{category}</li>
-            <li className='incurred_on'>{incurred_on}</li>
+            <li className='incurred_on'>{timeFormat(incurred_on)}</li>
             {notes && <li className='notes'>{notes}</li>}
           </ul>
           <div className='btn-container'>
