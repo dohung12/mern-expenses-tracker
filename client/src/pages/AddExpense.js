@@ -62,7 +62,6 @@ const AddExpense = () => {
     if (!title || !amount || !category) {
       displayAlert('Please provide all required values', 'danger');
     } else {
-      console.log(values);
       createExpense();
     }
   };
