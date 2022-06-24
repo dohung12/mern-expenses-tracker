@@ -5,10 +5,15 @@ const useGetExpenses = () => {
   const authFetch = useAuthFetch();
   const setupExpenses = useSetupExpenses();
 
-  const getExpenses = async () => {
+  const getExpenses = async (url = '') => {
+    // if search query is given, fetch that url
+    // else search by default
     try {
-      const { data } = await authFetch.get('/expenses');
-      setupExpenses(data.expenses);
+      const { data } = url
+        ? await authFetch.get(url)
+        : await authFetch.get('/expenses');
+      const { expenses, count, numOfPages } = data;
+      setupExpenses({ expenses, count, numOfPages });
     } catch (error) {
       console.log(error);
     }
