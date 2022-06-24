@@ -11,6 +11,8 @@ const initialState = {
   showSidebar: false,
   expenses: [],
   categories: [],
+  numOfPages: 1,
+  count: 0,
 };
 
 const AppContext = createContext(initialState);
