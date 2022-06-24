@@ -28,6 +28,20 @@ const Wrapper = styled.details`
       width: auto;
     }
   }
+
+  .update-category {
+    .header {
+      margin-bottom: 0.5rem;
+    }
+
+    .new-content {
+      display: flex;
+      gap: 1rem;
+    }
+    button {
+      width: fit-content;
+    }
+  }
 `;
 
 export default Wrapper;
