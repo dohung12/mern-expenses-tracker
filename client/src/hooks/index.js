@@ -5,7 +5,7 @@ import useLogoutUser from './useLogoutUser';
 import useAuthFetch from './useAuthFetch';
 import useSetupExpenses from './useSetupExpenses';
 import useGetExpenses from './useGetExpenses';
-import useSetupCategories from './useSetupCategories';
+import useGetCategories from './useGetCategories';
 export {
   useAlert,
   useSetupUser,
@@ -14,5 +14,5 @@ export {
   useAuthFetch,
   useSetupExpenses,
   useGetExpenses,
-  useSetupCategories,
+  useGetCategories,
 };
