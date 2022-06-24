@@ -1,6 +1,8 @@
 import React from 'react';
 import CreateCategoryBlock from './CreateCategoryBlock';
 import Wrapper from '../../assets/Wrapper/CategoriesContainerWrapper';
+import DeleteCategoryBlock from './DeleteCategoryBlock';
+
 const CategoriesContainer = () => {
   return (
     <Wrapper>
@@ -9,6 +11,7 @@ const CategoriesContainer = () => {
       </summary>
       {/* add new category block */}
       <CreateCategoryBlock />
+      <DeleteCategoryBlock />
     </Wrapper>
   );
 };

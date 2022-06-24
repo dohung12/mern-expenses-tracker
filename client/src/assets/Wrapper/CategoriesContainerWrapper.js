@@ -14,7 +14,8 @@ const Wrapper = styled.details`
     display: inline-block;
   }
 
-  .new-category {
+  .new-category,
+  .delete-category {
     .header {
       margin-bottom: 0.5rem;
     }
