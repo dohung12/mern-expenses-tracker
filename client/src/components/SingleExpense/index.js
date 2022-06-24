@@ -1,12 +1,14 @@
 import { useState } from 'react';
 import { FaPen, FaTrash } from 'react-icons/fa';
 import { useAuthFetch, useGetExpenses, useAlert } from '../../hooks/index';
+import Dropdown from '../Dropdown';
 import timeFormat from '../../utils/timeFormat';
 
 import DelConfirmModal from './DelConfirmModal';
 import EditFormModal from './EditFormModal';
 
 import Wrapper from '../../assets/Wrapper/SingleExpenseBlockWrapper';
+import { useAppContext } from '../../context/appContext';
 const SingleExpense = ({
   amount,
   category,
@@ -18,6 +20,8 @@ const SingleExpense = ({
   const date = new Date(incurred_on);
   const incurred_on_date = date.toISOString().substring(0, 10);
   const incurred_on_time = date.toISOString().substring(11, 16);
+
+  const { state } = useAppContext();
 
   const [values, setValues] = useState({
     amount,
@@ -79,7 +83,7 @@ const SingleExpense = ({
         </summary>
         <div className='info'>
           <ul>
-            <li className='category'>{category}</li>
+            <li className='category'>{category.title}</li>
             <li className='incurred_on'>{timeFormat(incurred_on)}</li>
             {notes && <li className='notes'>{notes}</li>}
           </ul>
