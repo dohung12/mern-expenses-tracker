@@ -1,6 +1,6 @@
-import { FormRow, Alert } from '../index';
+import { FormRow, Alert, Dropdown } from '../index';
 import Wrapper from '../../assets/Wrapper/EditFormModalWrapper';
-
+import { useAppContext } from '../../context/appContext';
 const EditFormModal = ({
   handleSubmit,
   values,
@@ -19,6 +19,7 @@ const EditFormModal = ({
   } = values;
 
   const { showAlert, alertText, alertType } = alert;
+  const { state } = useAppContext();
 
   const toggleShowModal = () => {
     setValues({ ...values, showEditModal: !values.showEditModal });
@@ -55,14 +56,10 @@ const EditFormModal = ({
               value={title}
               required
             />
-            <FormRow
-              name={'category'}
+            <Dropdown
               handleChange={handleChange}
-              placeholder='category'
-              type={'text'}
-              key='category'
-              value={category}
-              required
+              name='category'
+              optionLists={state.categories}
             />
             <FormRow
               name={'amount'}
@@ -108,7 +105,7 @@ const EditFormModal = ({
         </form>
         <footer className='btn-container'>
           <a
-            href='#cancel'
+            href=''
             role='button'
             className='secondary'
             data-target={dataTarget}
@@ -117,7 +114,7 @@ const EditFormModal = ({
             Cancel
           </a>
           <a
-            href='#confirm'
+            href=''
             role='button'
             data-target={dataTarget}
             onClick={handleSubmit}
