@@ -75,7 +75,7 @@ const getAllExpense = async (req, res) => {
   }
 
   // // get result from db
-  let result = ExpenseSchema.find(queryObj);
+  let result = ExpenseSchema.find(queryObj).populate('category');
 
   // sort return values based on options
   switch (sort) {
@@ -109,7 +109,6 @@ const getAllExpense = async (req, res) => {
   result = result.skip(skip).limit(limit);
 
   const expenses = await result;
-
   const totalExpenses = await ExpenseSchema.countDocuments(queryObj);
   const numOfPages = Math.ceil(totalExpenses / limit);
 
