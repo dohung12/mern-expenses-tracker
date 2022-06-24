@@ -11,6 +11,7 @@ import SingleExpense from './SingleExpense/';
 import ExpensesContainer from './ExpensesContainer';
 import SearchContainer from './SearchContainer';
 import Dropdown from './Dropdown';
+import AddCategoryModal from './AddCategoryModal';
 export {
   Logo,
   PublicNavbar,
@@ -25,4 +26,5 @@ export {
   ExpensesContainer,
   SearchContainer,
   Dropdown,
+  AddCategoryModal,
 };
