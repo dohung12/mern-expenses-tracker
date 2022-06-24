@@ -12,6 +12,7 @@ import ExpensesContainer from './ExpensesContainer';
 import SearchContainer from './SearchContainer';
 import Dropdown from './Dropdown';
 import CategoriesContainer from './CategoriesContainer/';
+import PageBtnContainer from './PageBtnContainer';
 export {
   Logo,
   PublicNavbar,
@@ -27,4 +28,5 @@ export {
   SearchContainer,
   Dropdown,
   CategoriesContainer,
+  PageBtnContainer,
 };
