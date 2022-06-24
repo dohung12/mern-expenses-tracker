@@ -47,6 +47,8 @@
   border-color: transparent;
   border-radius: var(--border-radius);
   text-align: center;
+
+  text-transform: capitalize;
 }
 
 .alert-danger {
