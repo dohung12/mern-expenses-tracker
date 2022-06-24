@@ -9,6 +9,7 @@ import Avatar from './Avatar';
 import FormRow from './FormRow';
 import SingleExpense from './SingleExpense/';
 import ExpensesContainer from './ExpensesContainer';
+import SearchContainer from './SearchContainer';
 export {
   Logo,
   PublicNavbar,
@@ -21,4 +22,5 @@ export {
   FormRow,
   SingleExpense,
   ExpensesContainer,
+  SearchContainer,
 };
