@@ -4,6 +4,7 @@ const Wrapper = styled.details`
   border: 1px solid #ccc;
   padding: 1rem;
   border-radius: 0.5rem;
+  background-color: #fff;
   summary {
     display: flex;
     justify-content: space-between;

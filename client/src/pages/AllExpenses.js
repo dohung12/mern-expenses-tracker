@@ -1,12 +1,11 @@
-import React from 'react';
-import Wrapper from '../assets/Wrapper/AllExpensePageWrapper';
-import { ExpensesContainer } from '../components/';
+import { ExpensesContainer, SearchContainer } from '../components/';
 
 const AllExpenses = () => {
   return (
-    <Wrapper>
+    <>
+      <SearchContainer />
       <ExpensesContainer />
-    </Wrapper>
+    </>
   );
 };
 

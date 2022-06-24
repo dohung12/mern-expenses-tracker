@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useAppContext } from '../context/appContext';
 import { useAuthFetch, useSetupExpenses } from '../hooks';
 import { SingleExpense } from './index';
+
 const ExpensesContainer = () => {
   const [isLoading, setIsLoading] = useState(false);
   const authFetch = useAuthFetch();
@@ -24,13 +25,13 @@ const ExpensesContainer = () => {
   }, []);
 
   return (
-    <div>
+    <>
       {isLoading && <button aria-busy={true}>Please wait...</button>}
       {state.expenses.length > 0 &&
         state.expenses.map((expense) => {
           return <SingleExpense key={expense._id} {...expense} />;
         })}
-    </div>
+    </>
   );
 };
 
