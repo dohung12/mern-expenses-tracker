@@ -240,7 +240,7 @@ const showStats = async (req, res) => {
       }
       month = DateTime.fromISO(`${year}-${month}`).toFormat('MMM');
       date = month + ' ' + year;
-      totalAmount = totalAmount.toFixed(2);
+      totalAmount = totalAmount.toFixed();
       return { year, month, totalAmount, date };
     })
     .reverse();
@@ -262,10 +262,19 @@ const expensesPerCategory = async (req, res) => {
         },
       },
     },
-    { $group: { _id: '$category', count: { $sum: '$amount' } } },
+    { $group: { _id: '$category', totalAmount: { $sum: '$amount' } } },
   ]);
 
-  res.json(result);
+  result = await Promise.all(
+    result.map(async (element) => {
+      const { _id, totalAmount } = element;
+      const category = await CategorySchema.findById(_id);
+
+      return { category: category.title, totalAmount };
+    })
+  );
+
+  res.json({ result });
 };
 
 module.exports = {
