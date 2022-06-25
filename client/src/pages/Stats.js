@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { BarChart, AreaChart } from '../components/index';
+import { BarChart, AreaChart, MonthlySpendingChart } from '../components/index';
 import { useAuthFetch } from '../hooks';
 
 const Wrapper = styled.div`
@@ -13,7 +13,6 @@ const Wrapper = styled.div`
 const Stats = () => {
   const [chartData, setChartData] = useState({});
   const authFetch = useAuthFetch();
-  const [showBarChart, setShowBarChart] = useState(true);
 
   const fetchData = async () => {
     try {
@@ -30,23 +29,7 @@ const Stats = () => {
 
   return (
     <Wrapper>
-      <hgroup>
-        <h2>Monthly Spending Total</h2>
-        <a
-          href='#'
-          onClick={() => {
-            setShowBarChart(!showBarChart);
-          }}
-        >
-          Switch to {showBarChart ? 'Area Chart' : 'Bar Chart'}
-        </a>
-      </hgroup>
-
-      {showBarChart ? (
-        <BarChart data={chartData} />
-      ) : (
-        <AreaChart data={chartData} />
-      )}
+      <MonthlySpendingChart chartData={chartData} />
     </Wrapper>
   );
 };

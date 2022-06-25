@@ -15,6 +15,7 @@ import CategoriesContainer from './CategoriesContainer/';
 import PageBtnContainer from './PageBtnContainer';
 import BarChart from './BarChart';
 import AreaChart from './AreaChart';
+import MonthlySpendingChart from './MonthlySpendingChart';
 export {
   Logo,
   PublicNavbar,
@@ -33,4 +34,5 @@ export {
   PageBtnContainer,
   BarChart,
   AreaChart,
+  MonthlySpendingChart,
 };
