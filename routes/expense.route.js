@@ -11,14 +11,15 @@ const {
 } = require('../controllers/expense.controller');
 
 router.route('/').get(getAllExpense).post(createExpense);
+
+// STATS ROUTE
+router.route('/stats').get(showStats);
+router.route('/stats/category').get(expensesPerCategory);
+
 router
   .route('/:expenseId')
   .get(getSingleExpense)
   .patch(updateExpense)
   .delete(deleteExpense);
-
-// STATS ROUTE
-router.route('/stats').get(showStats);
-router.route('/stats/category').get(expensesPerCategory);
 
 module.exports = router;
