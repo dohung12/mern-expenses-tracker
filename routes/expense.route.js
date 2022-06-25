@@ -6,9 +6,11 @@ const {
   createExpense,
   deleteExpense,
   updateExpense,
+  showStats,
 } = require('../controllers/expense.controller');
 
 router.route('/').get(getAllExpense).post(createExpense);
+router.route('/stats').get(showStats);
 router
   .route('/:expenseId')
   .get(getSingleExpense)

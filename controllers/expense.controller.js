@@ -2,6 +2,7 @@ const ExpenseSchema = require('../models/expense.model');
 const CategorySchema = require('../models/category.model');
 const { StatusCodes } = require('http-status-codes');
 const checkPermission = require('../utils/checkPermission');
+const mongoose = require('mongoose');
 
 const getSingleExpense = async (req, res) => {
   const { expenseId } = req.params;
@@ -212,10 +213,69 @@ const deleteExpense = async (req, res) => {
   });
 };
 
+const showStats = async (req, res) => {
+  let categoriesSpending = await ExpenseSchema.aggregate([
+    { $match: { createdBy: mongoose.Types.ObjectId(req.user.userId) } },
+    { $group: { _id: '$category', count: { $sum: '$amount' } } },
+  ]);
+
+  let monthlySpending = await ExpenseSchema.aggregate([
+    { $match: { createdBy: mongoose.Types.ObjectId(req.user.userId) } },
+    {
+      $group: {
+        _id: {
+          year: { $year: '$incurred_on' },
+          month: { $month: '$incurred_on' },
+          // date: { $dayOfMonth: '$incurred_on' },
+        },
+        totalAmount: { $sum: '$amount' },
+        count: { $sum: 1 },
+      },
+    },
+    { $sort: { '_id.year': -1, '_id.month': -1 } },
+  ]);
+
+  // THIS MONTH, SORT BASED ON CATEGORY
+  let categoryMonthlyAvg = await ExpenseSchema.aggregate([
+    { $match: { createdBy: mongoose.Types.ObjectId(req.user.userId) } },
+    {
+      $group: {
+        _id: { category: '$category', month: { $month: '$incurred_on' } },
+        totalSpent: { $sum: '$amount' },
+      },
+    },
+    { $group: { _id: '$_id.category', avgSpent: { $avg: '$totalSpent' } } },
+  ]);
+
+  const date = new Date(),
+    y = date.getFullYear(),
+    m = date.getMonth();
+  const firstDay = new Date(y, m, 1);
+  const lastDay = new Date(y, m + 1, 0);
+  let thisMonthTotal = await ExpenseSchema.aggregate([
+    {
+      $match: {
+        createdBy: mongoose.Types.ObjectId(req.user.userId),
+        incurred_on: { $gte: firstDay, $lte: lastDay },
+      },
+    },
+    { $group: { _id: '$category', totalSpent: { $sum: '$amount' } } },
+    {
+      $project: {
+        _id: '$_id',
+        value: { total: '$totalSpent' },
+      },
+    },
+  ]);
+
+  res.json({ categoryMonthlyAvg, thisMonthTotal });
+};
+
 module.exports = {
   getSingleExpense,
   getAllExpense,
   createExpense,
   updateExpense,
   deleteExpense,
+  showStats,
 };
