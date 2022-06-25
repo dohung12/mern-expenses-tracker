@@ -1,12 +1,12 @@
 function createSearchUrl({
-  title,
-  sort,
-  category,
-  incurred_on_from,
-  incurred_on_to,
-  amountFrom,
-  amountTo,
-  page,
+  title = '',
+  sort = 'latest',
+  category = 'all',
+  incurred_on_from = '',
+  incurred_on_to = '',
+  amountFrom = 0,
+  amountTo = 0,
+  page = 1,
 }) {
   let url = `/expenses?page=${page}&title=${title}&category=${category}&sort=${sort}`;
   if (incurred_on_from) {
