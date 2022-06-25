@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { ExpensesContainer, SearchContainer } from '../components/';
 import { useGetCategories, useGetExpenses } from '../hooks';
+import createSearchUrl from '../utils/createSearchUrl';
 
 const initState = {
   title: '',
@@ -14,12 +15,15 @@ const initState = {
   amountFrom: 0,
   amountTo: 0,
   sort: 'latest',
+  page: 1,
 };
 
 const AllExpenses = () => {
-  const [page, setPage] = useState(1);
   const [values, setValues] = useState(initState);
 
+  const setPage = (page) => {
+    setValues({ ...values, page });
+  };
   const getExpenses = useGetExpenses();
   const getCategories = useGetCategories();
 
@@ -35,22 +39,10 @@ const AllExpenses = () => {
     incurred_on_to,
     amountFrom,
     amountTo,
+    page,
   } = values;
   useEffect(() => {
-    let url = `/expenses?page=${page}&title=${title}&category=${category}&sort=${sort}`;
-    if (incurred_on_from) {
-      url += `&incurred_on_from=${incurred_on_from}`;
-    }
-    if (incurred_on_to) {
-      url += `&incurred_on_to=${incurred_on_to}`;
-    }
-    if (amountFrom) {
-      url += `&amount_from=${amountFrom}`;
-    }
-    if (amountTo) {
-      url += `&amount_to=${amountTo}`;
-    }
-
+    const url = createSearchUrl(values);
     getExpenses(url);
     getCategories();
   }, [
@@ -72,7 +64,7 @@ const AllExpenses = () => {
         setValues={setValues}
         setBackToDefault={setBackToDefault}
       />
-      <ExpensesContainer page={page} setPage={setPage} />
+      <ExpensesContainer page={values.page} setPage={setPage} />
     </>
   );
 };
