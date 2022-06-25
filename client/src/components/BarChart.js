@@ -21,6 +21,7 @@ const BarChartComponent = ({ data }) => {
           name={'monthly spending'}
           fill='#00897b'
           barSize={75}
+          label={{ color: 'white' }}
         />
       </BarChart>
     </ResponsiveContainer>
