@@ -81,10 +81,10 @@ const getAllExpense = async (req, res) => {
   // sort return values based on options
   switch (sort) {
     case 'latest':
-      result = result.sort('-createdAt');
+      result = result.sort('-incurred_on');
       break;
     case 'oldest':
-      result = result.sort('createdAt');
+      result = result.sort('incurred_on');
       break;
     case 'a-z':
       result = result.sort('title');
