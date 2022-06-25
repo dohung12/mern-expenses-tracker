@@ -270,7 +270,10 @@ const expensesPerCategory = async (req, res) => {
       const { _id, totalAmount } = element;
       const category = await CategorySchema.findById(_id);
 
-      return { category: category.title, totalAmount };
+      return {
+        category: category.title,
+        totalAmount: Number(totalAmount.toFixed(2)),
+      };
     })
   );
 
