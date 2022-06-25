@@ -249,7 +249,8 @@ const showStats = async (req, res) => {
 };
 
 const expensesPerCategory = async (req, res) => {
-  const { incurred_on_from, incurred_on_to } = req.query;
+  const incurred_on_from = new Date(req.query.incurred_on_from);
+  const incurred_on_to = new Date(req.query.incurred_on_to);
 
   let result = await ExpenseSchema.aggregate([
     {
