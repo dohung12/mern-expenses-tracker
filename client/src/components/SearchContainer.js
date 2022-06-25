@@ -12,7 +12,7 @@ const sortOptions = [
   'amount: high to low',
 ];
 
-const SearchContainer = ({ values, setValues, setBackToDefault, setPage }) => {
+const SearchContainer = ({ values, setValues, setBackToDefault }) => {
   const { state } = useAppContext();
   const {
     title,
@@ -33,13 +33,12 @@ const SearchContainer = ({ values, setValues, setBackToDefault, setPage }) => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+    // RESET PAGINATION WHEN START SEARCHING
     setValues({
       ...values,
       [name]: value,
+      page: 1,
     });
-
-    // RESET PAGINATION WHEN START SEARCHING
-    setPage(1);
   };
   const handleClearBtn = (e) => {
     e.preventDefault();
