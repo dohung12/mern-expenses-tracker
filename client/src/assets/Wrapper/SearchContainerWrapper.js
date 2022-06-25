@@ -5,6 +5,7 @@ const Wrapper = styled.details`
   box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
   border-radius: 5px;
   margin-bottom: 2rem;
+  text-transform: capitalize;
 
   summary {
     border-bottom: 2px solid var(--primary);
@@ -18,12 +19,6 @@ const Wrapper = styled.details`
       width: 1.5rem;
       height: 1.5rem;
     }
-  }
-
-  label,
-  option,
-  select {
-    text-transform: capitalize;
   }
 
   .header,
