@@ -3,7 +3,7 @@ const CategorySchema = require('../models/category.model');
 const { StatusCodes } = require('http-status-codes');
 const checkPermission = require('../utils/checkPermission');
 const mongoose = require('mongoose');
-
+const { DateTime } = require('luxon');
 const getSingleExpense = async (req, res) => {
   const { expenseId } = req.params;
 
@@ -214,11 +214,6 @@ const deleteExpense = async (req, res) => {
 };
 
 const showStats = async (req, res) => {
-  let categoriesSpending = await ExpenseSchema.aggregate([
-    { $match: { createdBy: mongoose.Types.ObjectId(req.user.userId) } },
-    { $group: { _id: '$category', count: { $sum: '$amount' } } },
-  ]);
-
   let monthlySpending = await ExpenseSchema.aggregate([
     { $match: { createdBy: mongoose.Types.ObjectId(req.user.userId) } },
     {
@@ -226,49 +221,50 @@ const showStats = async (req, res) => {
         _id: {
           year: { $year: '$incurred_on' },
           month: { $month: '$incurred_on' },
-          // date: { $dayOfMonth: '$incurred_on' },
         },
         totalAmount: { $sum: '$amount' },
-        count: { $sum: 1 },
       },
     },
     { $sort: { '_id.year': -1, '_id.month': -1 } },
+    { $limit: 6 },
   ]);
 
-  // THIS MONTH, SORT BASED ON CATEGORY
-  let categoryMonthlyAvg = await ExpenseSchema.aggregate([
-    { $match: { createdBy: mongoose.Types.ObjectId(req.user.userId) } },
-    {
-      $group: {
-        _id: { category: '$category', month: { $month: '$incurred_on' } },
-        totalSpent: { $sum: '$amount' },
-      },
-    },
-    { $group: { _id: '$_id.category', avgSpent: { $avg: '$totalSpent' } } },
-  ]);
+  monthlySpending = monthlySpending
+    .map((element) => {
+      let {
+        _id: { year, month },
+        totalAmount,
+      } = element;
+      if (month < 10) {
+        month = '0' + month;
+      }
+      month = DateTime.fromISO(`${year}-${month}`).toFormat('MMM');
+      date = month + ' ' + year;
+      totalAmount = totalAmount.toFixed(2);
+      return { year, month, totalAmount, date };
+    })
+    .reverse();
 
-  const date = new Date(),
-    y = date.getFullYear(),
-    m = date.getMonth();
-  const firstDay = new Date(y, m, 1);
-  const lastDay = new Date(y, m + 1, 0);
-  let thisMonthTotal = await ExpenseSchema.aggregate([
+  res.json({ monthlySpending });
+};
+
+const expensesPerCategory = async (req, res) => {
+  const { incurred_on_from, incurred_on_to } = req.query;
+
+  let result = await ExpenseSchema.aggregate([
     {
       $match: {
         createdBy: mongoose.Types.ObjectId(req.user.userId),
-        incurred_on: { $gte: firstDay, $lte: lastDay },
+        incurred_on: {
+          $gte: incurred_on_from,
+          $lte: incurred_on_to,
+        },
       },
     },
-    { $group: { _id: '$category', totalSpent: { $sum: '$amount' } } },
-    {
-      $project: {
-        _id: '$_id',
-        value: { total: '$totalSpent' },
-      },
-    },
+    { $group: { _id: '$category', count: { $sum: '$amount' } } },
   ]);
 
-  res.json({ categoryMonthlyAvg, thisMonthTotal });
+  res.json(result);
 };
 
 module.exports = {
@@ -278,4 +274,5 @@ module.exports = {
   updateExpense,
   deleteExpense,
   showStats,
+  expensesPerCategory,
 };

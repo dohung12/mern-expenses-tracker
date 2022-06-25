@@ -4,7 +4,6 @@ import {
   CartesianGrid,
   XAxis,
   YAxis,
-  Legend,
   Bar,
   ResponsiveContainer,
   Tooltip,
@@ -14,14 +13,13 @@ const BarChartComponent = ({ data }) => {
     <ResponsiveContainer width='100%' height={250}>
       <BarChart data={data} margin={{ top: 50 }}>
         <CartesianGrid strokeDasharray='3 3 ' />
-        <XAxis dataKey='month' />
+        <XAxis dataKey='date' />
         <YAxis allowDecimals={false} />
-        <Legend />
         <Tooltip />
         <Bar
           dataKey='totalAmount'
           name={'monthly spending'}
-          fill='#2cb1bc'
+          fill='#00897b'
           barSize={75}
         />
       </BarChart>
