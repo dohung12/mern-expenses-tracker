@@ -1,20 +1,8 @@
-import { useState } from 'react';
 import { FormRow, Alert } from './index';
 import { useAppContext } from '../context/appContext';
-import { useAlert, useGetExpenses } from '../hooks';
+import { useAlert } from '../hooks';
 import Wrapper from '../assets/Wrapper/SearchContainerWrapper';
 
-const initState = {
-  title: '',
-  category: 'all',
-  incurred_on_date_from: '',
-  incurred_on_time_from: '',
-  incurred_on_date_to: '',
-  incurred_on_time_to: '',
-  amountFrom: 0,
-  amountTo: 0,
-  sort: 'latest',
-};
 const sortOptions = [
   'latest',
   'oldest',
@@ -24,9 +12,8 @@ const sortOptions = [
   'amount: high to low',
 ];
 
-const SearchContainer = ({ setNumOfPages }) => {
+const SearchContainer = ({ values, setValues, setBackToDefault, setPage }) => {
   const { state } = useAppContext();
-  const [values, setValues] = useState(initState);
   const {
     title,
     category,
@@ -38,8 +25,6 @@ const SearchContainer = ({ setNumOfPages }) => {
     amountTo,
     sort,
   } = values;
-
-  const getExpenses = useGetExpenses();
   const categoryOptions = state.categories.map((category) => {
     return category.title;
   });
@@ -52,55 +37,48 @@ const SearchContainer = ({ setNumOfPages }) => {
       ...values,
       [name]: value,
     });
+
+    // RESET PAGINATION WHEN START SEARCHING
+    setPage(1);
   };
   const handleClearBtn = (e) => {
     e.preventDefault();
-    setValues(initState);
+    setBackToDefault();
   };
   const handleSubmit = (e) => {
     e.preventDefault();
     // CREATE INCURRED_ON_FROM VARIABLES WHEN DATE AND TIME TRUTHY
-    let incurred_on_from;
     if (incurred_on_date_from && incurred_on_time_from) {
-      incurred_on_from = new Date(
+      const temp = new Date(
         incurred_on_date_from + ' ' + incurred_on_time_from
       );
-      incurred_on_from = incurred_on_from.toISOString();
+      setValues({
+        ...values,
+        incurred_on_from: temp.toISOString(),
+      });
     }
     // CREATE INCURRED_ON_TO VARIABLES WHEN DATE AND TIME TRUTHY
-    let incurred_on_to;
     if (incurred_on_date_to && incurred_on_time_to) {
-      incurred_on_to = new Date(
-        incurred_on_date_to + ' ' + incurred_on_time_to
-      );
-      incurred_on_to = incurred_on_to.toISOString();
-    }
-
-    let url = `/expenses?title=${title}&category=${category}&sort=${sort}`;
-    if (incurred_on_from) {
-      url += `&incurred_on_from=${incurred_on_from}`;
-    }
-    if (incurred_on_to) {
-      url += `&incurred_on_to=${incurred_on_to}`;
-    }
-    if (amountFrom) {
-      url += `&amount_from=${amountFrom}`;
-    }
-    if (amountTo) {
-      url += `&amount_to=${amountTo}`;
+      const temp = new Date(incurred_on_date_to + ' ' + incurred_on_time_to);
+      setValues({
+        ...values,
+        incurred_on_to: temp.toISOString(),
+      });
     }
 
     // ALERT NONLOGICAL SEARCH
     if (
-      incurred_on_from &&
-      incurred_on_to &&
-      incurred_on_from > incurred_on_to
+      values.incurred_on_from &&
+      values.incurred_on_to &&
+      values.incurred_on_from > values.incurred_on_to
     ) {
       displayAlert('Starting time must not later than end time', 'danger');
-    } else if (amountFrom && amountTo && amountFrom > amountTo) {
+    } else if (
+      values.amountFrom &&
+      values.amountTo &&
+      values.amountFrom > values.amountTo
+    ) {
       displayAlert('Starting amount must not larger than end amount', 'danger');
-    } else {
-      getExpenses(url);
     }
   };
 
