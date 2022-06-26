@@ -26,14 +26,7 @@ const Dashboard = () => {
   const getExpenses = useGetExpenses();
 
   const [values, setValues] = useState(initState);
-  const {
-    page,
-    inputDate,
-    showInputDate,
-    incurred_on_from,
-    incurred_on_to,
-    type,
-  } = values;
+  const { page, inputDate, incurred_on_from, incurred_on_to, type } = values;
 
   const handleSetDate = (e) => {
     setValues({ ...values, inputDate: e.target.value });
