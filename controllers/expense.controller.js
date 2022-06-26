@@ -277,6 +277,10 @@ const expensesPerCategory = async (req, res) => {
     })
   );
 
+  result.sort((a, b) => {
+    return a.totalAmount - b.totalAmount;
+  });
+
   res.json({ result });
 };
 
