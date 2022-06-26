@@ -39,9 +39,6 @@ const createRandomExpense = (categoryId, userId, boundary) => {
 };
 
 const createRandomUserAcc = async (req, res) => {
-  CategorySchema.deleteMany();
-  ExpenseSchema.deleteMany();
-
   // create random user
   const userData = {
     username: faker.internet.userName(),
@@ -51,16 +48,22 @@ const createRandomUserAcc = async (req, res) => {
   };
   const user = await UserSchema.create(userData);
   const token = user.createJWT();
+
   // create category
   const categoryId = await createCategory(user._id);
+
   // create random expenses
-  const expensesAmount = 50;
-  for (let idx = 0; idx < expensesAmount; idx++) {
+  const recentExpensesAmount = 20;
+  for (let idx = 0; idx < recentExpensesAmount; idx++) {
     const result = createRandomExpense(categoryId, user._id, 'recent');
     await ExpenseSchema.create(result);
   }
+  const pastExpensesAmount = 50;
+  for (let idx = 0; idx < pastExpensesAmount; idx++) {
+    const result = createRandomExpense(categoryId, user._id, 'past');
+    await ExpenseSchema.create(result);
+  }
 
-  console.log('Success');
   return res.status(200).json({
     user,
     token,
