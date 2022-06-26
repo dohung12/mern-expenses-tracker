@@ -109,7 +109,10 @@ const EditFormModal = ({
             role='button'
             className='secondary'
             data-target={dataTarget}
-            onClick={toggleShowModal}
+            onClick={(e) => {
+              e.preventDefault();
+              toggleShowModal();
+            }}
           >
             Cancel
           </a>
