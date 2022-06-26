@@ -13,6 +13,7 @@ const initialState = {
   categories: [],
   numOfPages: 1,
   count: 0,
+  totalAmount: 0,
 };
 
 const AppContext = createContext(initialState);

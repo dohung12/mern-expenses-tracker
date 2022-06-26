@@ -12,8 +12,8 @@ const useGetExpenses = () => {
       const { data } = url
         ? await authFetch.get(url)
         : await authFetch.get('/expenses');
-      const { expenses, count, numOfPages } = data;
-      setupExpenses({ expenses, count, numOfPages });
+      const { expenses, count, numOfPages, totalAmount } = data;
+      setupExpenses({ expenses, count, numOfPages, totalAmount });
     } catch (error) {
       console.log(error);
     }

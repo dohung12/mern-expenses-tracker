@@ -36,11 +36,6 @@ const Dashboard = () => {
     type,
   } = values;
 
-  const total = 0;
-  // state.expenses.reduce((acc, curr) => {
-  //   return (acc += curr.amount);
-  // }, 0);
-
   const toggleShowInputDate = () => {
     setValues({ ...values, showInputDate: !showInputDate });
   };
@@ -129,15 +124,15 @@ const Dashboard = () => {
                     DateTime.DATE_MED
                   )}
                   {' - '}
-                  {DateTime.fromJSDate(incurred_on_to).toLocaleString(
-                    DateTime.DATE_MED
-                  )}
+                  {DateTime.fromJSDate(incurred_on_to)
+                    .minus({ days: 1 })
+                    .toLocaleString(DateTime.DATE_MED)}
                 </h3>
               </>
             )}
 
             {/* TODO */}
-            <h2 className='total'>{total.toFixed(2)}$</h2>
+            <h2 className='total'>{state.totalAmount.toFixed(2)}$</h2>
             <h4>You have spent </h4>
           </hgroup>
         </div>

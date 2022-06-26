@@ -24,12 +24,13 @@ function reducer(state, action) {
         user: action.payload.user,
       };
     case 'SETUP_EXPENSES':
-      const { expenses, count, numOfPages } = action.payload;
+      const { expenses, count, numOfPages, totalAmount } = action.payload;
       return {
         ...state,
         expenses,
         count,
         numOfPages,
+        totalAmount,
       };
     case 'SETUP_CATEGORIES':
       const { categories } = action.payload;

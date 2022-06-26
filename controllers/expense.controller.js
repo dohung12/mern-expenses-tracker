@@ -99,7 +99,7 @@ const getAllExpense = async (req, res) => {
       result = result.sort('-amount');
       break;
     default:
-      result = result.sort('-createdAt');
+      result = result.sort('-incurred_on');
       break;
   }
 
@@ -113,10 +113,17 @@ const getAllExpense = async (req, res) => {
   const totalExpenses = await ExpenseSchema.countDocuments(queryObj);
   const numOfPages = Math.ceil(totalExpenses / limit);
 
+  // GET TOTAL AMOUNT
+  const docs = await ExpenseSchema.find(queryObj);
+  const totalAmount = docs.reduce((acc, curr) => {
+    return (acc += curr.amount);
+  }, 0);
+
   res.status(StatusCodes.OK).json({
     count: totalExpenses,
     expenses,
     numOfPages,
+    totalAmount,
   });
 };
 
