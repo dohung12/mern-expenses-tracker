@@ -17,7 +17,6 @@ const initState = {
   page: 1,
   type: 'date',
   inputDate: '',
-  showInputDate: false,
   incurred_on_from: TODAY_RANGE.from,
   incurred_on_to: TODAY_RANGE.to,
 };
@@ -36,10 +35,6 @@ const Dashboard = () => {
     type,
   } = values;
 
-  const toggleShowInputDate = () => {
-    setValues({ ...values, showInputDate: !showInputDate });
-  };
-
   const handleSetDate = (e) => {
     setValues({ ...values, inputDate: e.target.value });
   };
@@ -51,11 +46,11 @@ const Dashboard = () => {
       const { from, to } = getDateRange(newDate);
       setValues({
         ...values,
+        type: 'date',
         incurred_on_from: from,
         incurred_on_to: to,
       });
     }
-    toggleShowInputDate();
   };
 
   const setToday = () => {
@@ -149,22 +144,18 @@ const Dashboard = () => {
           <a href='#this_month' onClick={setThisMonth}>
             This month
           </a>
-          <a href='#' onClick={toggleShowInputDate}>
-            Choose a date
-          </a>
-          {showInputDate && (
-            <form action=''>
-              <input
-                type='date'
-                name='date'
-                value={inputDate}
-                onChange={handleSetDate}
-              />
-              <button type='submit' onClick={handleSubmit}>
-                Search
-              </button>
-            </form>
-          )}
+          <a href='#'>Choose a date</a>
+          <form action=''>
+            <input
+              type='date'
+              name='date'
+              value={inputDate}
+              onChange={handleSetDate}
+            />
+            <button type='submit' onClick={handleSubmit}>
+              Search
+            </button>
+          </form>
         </div>
       </div>
       <div className='expenses'>
