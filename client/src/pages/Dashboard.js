@@ -4,14 +4,22 @@ import { DateTime } from 'luxon';
 import { useAppContext } from '../context/appContext';
 import { useGetExpenses } from '../hooks';
 import createSearchUrl from '../utils/createSearchUrl';
+import {
+  THIS_MONTH,
+  THIS_WEEK,
+  TODAY_RANGE,
+  YESTERDAY,
+  getDateRange,
+} from '../utils/dateTime';
 import Wrapper from '../assets/Wrapper/DashboardPageWrapper';
 
 const initState = {
-  date: new Date(),
-  type: 'date',
   page: 1,
+  type: 'date',
   inputDate: '',
   showInputDate: false,
+  incurred_on_from: TODAY_RANGE.from,
+  incurred_on_to: TODAY_RANGE.to,
 };
 
 const Dashboard = () => {
@@ -19,11 +27,19 @@ const Dashboard = () => {
   const getExpenses = useGetExpenses();
 
   const [values, setValues] = useState(initState);
-  const { date, type, page, inputDate, showInputDate } = values;
+  const {
+    page,
+    inputDate,
+    showInputDate,
+    incurred_on_from,
+    incurred_on_to,
+    type,
+  } = values;
 
-  const total = state.expenses.reduce((acc, curr) => {
-    return (acc += curr.amount);
-  }, 0);
+  const total = 0;
+  // state.expenses.reduce((acc, curr) => {
+  //   return (acc += curr.amount);
+  // }, 0);
 
   const toggleShowInputDate = () => {
     setValues({ ...values, showInputDate: !showInputDate });
@@ -33,96 +49,100 @@ const Dashboard = () => {
     setValues({ ...values, inputDate: e.target.value });
   };
 
-  const setYesterday = () => {
-    const today = new Date();
-    const y = today.getFullYear();
-    const m = today.getMonth();
-    const d = today.getDate();
-    const result = new Date(y, m, d - 1);
-    setValues({ ...values, date: result, type: 'date' });
-  };
-
-  const setThisWeek = () => {
-    const today = new Date();
-    setValues({ ...values, date: today, type: 'week' });
-  };
-
-  const setThisMonth = () => {
-    const today = new Date();
-    setValues({ ...values, date: today, type: 'month' });
-  };
-
   const handleSubmit = (e) => {
     e.preventDefault();
     if (inputDate) {
       const newDate = new Date(inputDate.split('-').join(','));
+      const { from, to } = getDateRange(newDate);
       setValues({
-        date: newDate,
-        type: 'date',
+        ...values,
+        incurred_on_from: from,
+        incurred_on_to: to,
       });
     }
     toggleShowInputDate();
   };
 
-  const getTimeStamps = (arg, type) => {
-    // get  timestamps of
-    // 00:00 of start date
-    // 00:00 of the day after end date
-    const date = new Date(arg);
-    const y = date.getFullYear();
-    const m = date.getMonth();
-    const d = date.getDate();
-    let begin, end;
+  const setToday = () => {
+    setValues({
+      ...values,
+      type: 'date',
+      incurred_on_from: TODAY_RANGE.from,
+      incurred_on_to: TODAY_RANGE.to,
+    });
+  };
 
-    if (type === 'date') {
-      begin = new Date(y, m, d);
-      end = new Date(y, m, d + 1);
-    } else if (type === 'week') {
-      const dayOfWeek = date.getDay();
-      begin = new Date(y, m, d - dayOfWeek);
-      end = new Date(y, m, d + 7 - dayOfWeek);
-    } else if (type === 'month') {
-      begin = new Date(y, m, 1);
-      end = new Date(y, m + 1, 1);
-    }
+  const setYesterday = () => {
+    setValues({
+      ...values,
+      type: 'date',
+      incurred_on_from: YESTERDAY.from,
+      incurred_on_to: YESTERDAY.to,
+    });
+  };
 
-    if (begin && end) {
-      begin = begin.toISOString();
-      end = end.toISOString();
-    }
+  const setThisWeek = () => {
+    setValues({
+      ...values,
+      type: 'week',
+      incurred_on_from: THIS_WEEK.from,
+      incurred_on_to: THIS_WEEK.to,
+    });
+  };
 
-    return [begin, end];
+  const setThisMonth = () => {
+    setValues({
+      ...values,
+      type: 'month',
+      incurred_on_from: THIS_MONTH.from,
+      incurred_on_to: THIS_MONTH.to,
+    });
   };
 
   useEffect(() => {
-    const [incurred_on_from, incurred_on_to] = getTimeStamps(date, type);
-    const url = createSearchUrl({ incurred_on_from, incurred_on_to, page });
-
-    // console.log(url);
+    const url = createSearchUrl({
+      incurred_on_from: incurred_on_from.toISOString(),
+      incurred_on_to: incurred_on_to.toISOString(),
+      page,
+    });
     getExpenses(url);
-  }, [date, page]);
+  }, [incurred_on_from, page]);
 
   return (
     <Wrapper>
       <div className='aside'>
         <div className='info'>
           <hgroup>
-            <h1 className='header'>{date.getDate()}</h1>
-            <h6>
-              {DateTime.fromJSDate(date).toLocaleString(DateTime.DATE_MED)}
-            </h6>
+            {type === 'date' ? (
+              <>
+                <h1 className='header'>{incurred_on_from.getDate()}</h1>
+                <h6>
+                  {DateTime.fromJSDate(incurred_on_from).toLocaleString(
+                    DateTime.DATE_MED
+                  )}
+                </h6>
+              </>
+            ) : (
+              <>
+                <h3>
+                  {DateTime.fromJSDate(incurred_on_from).toLocaleString(
+                    DateTime.DATE_MED
+                  )}
+                  {' - '}
+                  {DateTime.fromJSDate(incurred_on_to).toLocaleString(
+                    DateTime.DATE_MED
+                  )}
+                </h3>
+              </>
+            )}
+
             {/* TODO */}
             <h2 className='total'>{total.toFixed(2)}$</h2>
             <h4>You have spent </h4>
           </hgroup>
         </div>
         <div className='select-date'>
-          <a
-            href='#today'
-            onClick={() => {
-              setValues({ ...values, date: new Date(), type: 'date' });
-            }}
-          >
+          <a href='#today' onClick={setToday}>
             Today
           </a>
           <a href='#yesterday' onClick={setYesterday}>
