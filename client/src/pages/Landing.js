@@ -1,7 +1,7 @@
 import img from '../assets/images/main.svg';
 import { useNavigate } from 'react-router-dom';
 import Wrapper from '../assets/Wrapper/LandingPageWrapper';
-
+import { CreateTestAccBtn } from '../components/index';
 const Landing = () => {
   const navigate = useNavigate();
   return (
@@ -17,6 +17,7 @@ const Landing = () => {
             </h6>
           </hgroup>
           <div className='btn-container'>
+            <CreateTestAccBtn />
             <button
               onClick={() => {
                 navigate('/login');
