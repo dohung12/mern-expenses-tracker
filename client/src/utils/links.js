@@ -25,19 +25,17 @@ const links = [
     path: 'add-expense',
     icon: <FaPlusSquare />,
   },
-
   {
     id: 4,
+    text: 'Reports',
+    path: 'stats',
+    icon: <FaChartArea />,
+  },
+  {
+    id: 5,
     text: 'Profile',
     path: 'profile',
     icon: <ImProfile />,
-  },
-
-  {
-    id: 5,
-    text: 'Stats',
-    path: 'stats',
-    icon: <FaChartArea />,
   },
   {
     id: 6,
