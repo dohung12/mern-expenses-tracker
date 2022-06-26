@@ -1,6 +1,5 @@
 const UserSchema = require('../models/user.model');
 const { StatusCodes } = require('http-status-codes');
-
 const updateProfile = async (req, res) => {
   const { profilePic, email, username } = req.body;
   const { userId } = req.user;
@@ -65,7 +64,7 @@ const updatePassword = async (req, res) => {
   });
 };
 
-const removeUser = async (req, res, next) => {
+const removeUser = async (req, res) => {
   const { userId } = req.user;
 
   await UserSchema.findByIdAndRemove(userId);
