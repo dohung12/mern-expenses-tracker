@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useAuthFetch } from '../hooks';
 import { FormRow, PieChartComponent } from './index';
 import { DateTime } from 'luxon';
-import { thisMonth } from '../utils/dateTime';
+import { THIS_MONTH } from '../utils/dateTime';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
@@ -51,7 +51,7 @@ const SpendingInCategoryChart = () => {
   };
 
   useEffect(() => {
-    const { from, to } = thisMonth;
+    const { from, to } = THIS_MONTH;
     fetchCategorizeSpending(from.toISOString(), to.toISOString());
   }, []);
 
@@ -78,8 +78,9 @@ const SpendingInCategoryChart = () => {
       </form>
       <h4 className='chart-legend'>
         From{' '}
-        {DateTime.fromJSDate(thisMonth.from).toLocaleString(DateTime.DATE_MED)}{' '}
-        to {DateTime.fromJSDate(thisMonth.to).toLocaleString(DateTime.DATE_MED)}
+        {DateTime.fromJSDate(THIS_MONTH.from).toLocaleString(DateTime.DATE_MED)}{' '}
+        to{' '}
+        {DateTime.fromJSDate(THIS_MONTH.to).toLocaleString(DateTime.DATE_MED)}
       </h4>
       {spendingInCat && <PieChartComponent data={spendingInCat} />}
     </Wrapper>
