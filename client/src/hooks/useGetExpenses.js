@@ -1,9 +1,19 @@
 import useAuthFetch from './useAuthFetch';
-import useSetupExpenses from './useSetupExpenses';
 
 const useGetExpenses = () => {
   const authFetch = useAuthFetch();
-  const setupExpenses = useSetupExpenses();
+
+  const setupExpenses = ({ expenses, count, numOfPages, totalAmount }) => {
+    dispatch({
+      type: 'SETUP_EXPENSES',
+      payload: {
+        expenses,
+        count,
+        numOfPages,
+        totalAmount,
+      },
+    });
+  };
 
   const getExpenses = async (url = '') => {
     // if search query is given, fetch that url
