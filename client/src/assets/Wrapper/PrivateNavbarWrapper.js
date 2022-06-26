@@ -3,6 +3,37 @@ import styled from 'styled-components';
 const Wrapper = styled.nav`
   box-shadow: rgb(0 0 0 / 10%) 0px 1px 0px 0px;
   background-color: #fff;
+  height: 80px;
+
+  .logo {
+    display: flex;
+    align-items: center;
+    .brand {
+      margin: 0;
+      display: none;
+      @media (min-width: 992px) {
+        display: block;
+      }
+    }
+  }
+  .icons-container {
+    display: flex;
+    gap: 1rem;
+    .icon svg {
+      width: 2rem;
+      height: auto;
+      color: var(--muted-color);
+    }
+
+    [data-tooltip]::before {
+      top: 100%;
+      bottom: unset;
+    }
+
+    .icon.active svg {
+      color: var(--primary);
+    }
+  }
 
   .toggle-btn {
     border-color: var(--muted-color);
@@ -12,23 +43,12 @@ const Wrapper = styled.nav`
       color: var(--muted-color);
     }
   }
+
   li {
     padding: 0;
     .active {
       font-weight: bolder;
       color: var(--primary);
-    }
-  }
-
-  .logo {
-    display: flex;
-    align-items: center;
-    h2 {
-      margin: 0;
-      display: none;
-      @media (min-width: 992px) {
-        display: block;
-      }
     }
   }
 
