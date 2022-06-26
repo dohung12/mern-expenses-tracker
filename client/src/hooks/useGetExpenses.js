@@ -1,6 +1,8 @@
+import { useAppContext } from '../context/appContext';
 import useAuthFetch from './useAuthFetch';
 
 const useGetExpenses = () => {
+  const { dispatch } = useAppContext();
   const authFetch = useAuthFetch();
 
   const setupExpenses = ({ expenses, count, numOfPages, totalAmount }) => {
