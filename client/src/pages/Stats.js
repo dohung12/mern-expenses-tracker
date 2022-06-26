@@ -1,35 +1,34 @@
-import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { BarChart, AreaChart, MonthlySpendingChart } from '../components/index';
-import { useAuthFetch } from '../hooks';
+import {
+  MonthlySpendingChart,
+  SpendingInCategoryChart,
+} from '../components/index';
 
 const Wrapper = styled.div`
   padding: 1rem;
   border-radius: 0.5rem;
   box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
   text-transform: capitalize;
+
+  form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: center;
+    justify-content: flex-end;
+    margin-bottom: 0;
+    button {
+      width: auto;
+      height: fit-content;
+    }
+  }
 `;
 
 const Stats = () => {
-  const [chartData, setChartData] = useState({});
-  const authFetch = useAuthFetch();
-
-  const fetchData = async () => {
-    try {
-      const { data } = await authFetch.get('/expenses/stats');
-      setChartData(data.monthlySpending);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  useEffect(() => {
-    fetchData();
-  }, []);
-
   return (
     <Wrapper>
-      <MonthlySpendingChart chartData={chartData} />
+      <MonthlySpendingChart />
+      <SpendingInCategoryChart />
     </Wrapper>
   );
 };

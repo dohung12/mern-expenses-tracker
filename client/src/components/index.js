@@ -17,6 +17,7 @@ import BarChart from './BarChart';
 import AreaChart from './AreaChart';
 import MonthlySpendingChart from './MonthlySpendingChart';
 import PieChartComponent from './PieChart';
+import SpendingInCategoryChart from './SpendingInCategoryChart';
 export {
   Logo,
   PublicNavbar,
@@ -37,4 +38,5 @@ export {
   AreaChart,
   MonthlySpendingChart,
   PieChartComponent,
+  SpendingInCategoryChart,
 };
