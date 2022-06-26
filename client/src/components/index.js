@@ -18,6 +18,7 @@ import AreaChart from './AreaChart';
 import MonthlySpendingChart from './MonthlySpendingChart';
 import PieChartComponent from './PieChart';
 import SpendingInCategoryChart from './SpendingInCategoryChart';
+import CreateTestAccBtn from './CreateTestAccBtn';
 export {
   Logo,
   PublicNavbar,
@@ -39,4 +40,5 @@ export {
   MonthlySpendingChart,
   PieChartComponent,
   SpendingInCategoryChart,
+  CreateTestAccBtn,
 };
