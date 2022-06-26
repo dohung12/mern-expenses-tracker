@@ -5,14 +5,19 @@ const m = TODAY.getMonth();
 const d = TODAY.getDate();
 const dayOfWeek = TODAY.getDay();
 
+const TODAY_RANGE = {
+  from: new Date(y, m, d),
+  to: new Date(y, m, d + 1),
+};
+
 const YESTERDAY = {
   from: new Date(y, m, d - 1),
-  end: new Date(y, m, d),
+  to: new Date(y, m, d),
 };
 
 const THIS_WEEK = {
   from: new Date(y, m, d - dayOfWeek),
-  end: new Date(y, m, d + 7 - dayOfWeek),
+  to: new Date(y, m, d + 7 - dayOfWeek),
 };
 
 const THIS_MONTH = {
@@ -31,4 +36,4 @@ const getDateRange = (arg) => {
     to: new Date(y, m, d + 1),
   };
 };
-export { TODAY, THIS_WEEK, THIS_MONTH, YESTERDAY, getDateRange };
+export { TODAY_RANGE, THIS_WEEK, THIS_MONTH, YESTERDAY, getDateRange };
