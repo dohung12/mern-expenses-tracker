@@ -36,4 +36,28 @@ const getDateRange = (arg) => {
     to: new Date(y, m, d + 1),
   };
 };
-export { TODAY_RANGE, THIS_WEEK, THIS_MONTH, YESTERDAY, getDateRange };
+
+const getMultipleDatesRange = (arg1, arg2) => {
+  const date1 = new Date(arg1);
+  const y1 = date1.getFullYear();
+  const m1 = date1.getMonth();
+  const d1 = date1.getDate();
+
+  const date2 = new Date(arg2);
+  const y2 = date2.getFullYear();
+  const m2 = date2.getMonth();
+  const d2 = date2.getDate();
+
+  return {
+    from: new Date(y1, m1, d1),
+    to: new Date(y2, m2, d2 + 1),
+  };
+};
+export {
+  TODAY_RANGE,
+  THIS_WEEK,
+  THIS_MONTH,
+  YESTERDAY,
+  getDateRange,
+  getMultipleDatesRange,
+};
