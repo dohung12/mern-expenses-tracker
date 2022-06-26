@@ -3,24 +3,7 @@ import { useAuthFetch } from '../hooks';
 import { FormRow, PieChartComponent } from './index';
 import { DateTime } from 'luxon';
 import { THIS_MONTH, getMultipleDatesRange } from '../utils/dateTime';
-import styled from 'styled-components';
-
-const Wrapper = styled.div`
-  margin-top: 1rem;
-
-  .chart-legend {
-    text-align: center;
-    margin-bottom: 0;
-  }
-
-  form {
-    flex-direction: column;
-
-    @media (min-width: 600px) {
-      flex-direction: row;
-    }
-  }
-`;
+import Wrapper from '../assets/Wrapper/SpendingInCategoryChartWrapper';
 
 const initState = {
   input_from: '',
