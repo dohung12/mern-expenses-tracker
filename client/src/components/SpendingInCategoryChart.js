@@ -48,6 +48,10 @@ const SpendingInCategoryChart = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    if (!input_from || !input_to) {
+      displayAlert('Please provide start date and end date', 'danger');
+    }
+
     if (input_from && input_to) {
       const newFrom = new Date(input_from.split('-').join(','));
       const newTo = new Date(input_to.split('-').join(','));
