@@ -9,16 +9,33 @@ import {
   Tooltip,
 } from 'recharts';
 const BarChartComponent = ({ data }) => {
+  let getMax;
+
+  if (data) {
+    getMax = data.reduce((acc, curr) => {
+      return Math.max(acc, curr.totalAmount);
+    }, 0);
+  }
+
   return (
-    <ResponsiveContainer width='100%' height={250}>
-      <BarChart data={data} margin={{ top: 50 }}>
-        <CartesianGrid strokeDasharray='3 3 ' />
+    <ResponsiveContainer width='100%' height={300}>
+      <BarChart
+        width={500}
+        height={300}
+        data={data}
+        margin={{
+          top: 5,
+          right: 30,
+          left: 20,
+          bottom: 5,
+        }}
+      >
+        <CartesianGrid strokeDasharray='3 3' />
         <XAxis dataKey='date' />
-        <YAxis allowDecimals={false} />
+        <YAxis type='number' domain={[0, getMax]} />
         <Tooltip />
         <Bar
           dataKey='totalAmount'
-          name={'monthly spending'}
           fill='#00897b'
           barSize={75}
           label={{ color: 'white' }}
