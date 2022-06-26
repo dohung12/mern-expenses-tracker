@@ -6,7 +6,7 @@ import UpdateCategoryBlock from './UpdateCategoryBlock';
 
 const CategoriesContainer = () => {
   return (
-    <Wrapper>
+    <Wrapper open={true}>
       <summary>
         <h2 className='header'>Categories</h2>
       </summary>
