@@ -31,7 +31,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(fileUpload({ useTempFiles: true }));
 app.use(passport.initialize());
-app.use(express.static(path.resolve(__dirname, './client/build')));
+// app.use(express.static(path.resolve(__dirname, './client/build')));
 app.use(
   helmet({
     contentSecurityPolicy: false,
@@ -45,9 +45,9 @@ app.use('/api/v1/category', verifyUser, categoryRoutes);
 app.use('/api/v1/uploads', verifyUser, uploadRoutes);
 
 // only when ready to deploy
-app.get('*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, './client/build', 'index.html'));
-});
+// app.get('*', (req, res) => {
+//   res.sendFile(path.resolve(__dirname, './client/build', 'index.html'));
+// });
 
 app.use(notFoundMiddleware);
 

@@ -79,7 +79,7 @@ const AddExpense = () => {
             <FormRow
               name={'title'}
               handleChange={handleChange}
-              placeholder='title'
+              placeholder='Title'
               type={'text'}
               key='title'
               value={title}
@@ -88,50 +88,45 @@ const AddExpense = () => {
             <FormRow
               name={'amount'}
               handleChange={handleChange}
-              placeholder='amount'
               type={'number'}
               key='amount'
               value={amount}
               required
             />
-          </div>
-          <div className='grid'>
             <Dropdown
               optionLists={state.categories}
               name={'category'}
               handleChange={handleChange}
-              // value={category}
             />
+          </div>
+          <div className='grid'>
             <FormRow
               name={'incurred_on_date'}
               handleChange={handleChange}
-              placeholder='incurred on date'
               labelText={'Date'}
               type={'date'}
-              key='incurred_on_date'
               value={incurred_on_date}
             />
             <FormRow
               name={'incurred_on_time'}
               handleChange={handleChange}
-              placeholder='incurred on time'
               labelText={'time'}
               type={'time'}
-              key='incurred_on_time'
               value={incurred_on_time}
             />
+            <FormRow
+              name={'notes'}
+              handleChange={handleChange}
+              placeholder='Notes'
+              type={'text'}
+              value={notes}
+            />
           </div>
-          <FormRow
-            name={'notes'}
-            handleChange={handleChange}
-            placeholder='notes'
-            type={'text'}
-            key='notes'
-            value={notes}
-          />
-          <button type='submit' disabled={isLoading}>
-            Submit
-          </button>
+          <div className='grid'>
+            <button type='submit' disabled={isLoading}>
+              Submit
+            </button>
+          </div>
         </form>
       </Wrapper>
 
