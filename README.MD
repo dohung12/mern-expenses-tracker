@@ -7,6 +7,8 @@
 - Using React, Node.js, Express & MongoDB to build a full-stack MERN Application.
 - The app is called "Where's My Money", a simple app for record and search for your spending history.
 
+Project in action - [Where's My Money](https://wmm-276.herokuapp.com/landing)
+
 #### Features
 
 - Create expense with timestamp on spending, user-defined category.
@@ -16,8 +18,6 @@
 - User profile page with customize profile picture.
 
   ![Dashboard image](https://res.cloudinary.com/dbvndh29t/image/upload/v1656322606/where%27s-my-money/dashboard_oo98go.png)
-
-Project in action - [Where's My Money](https://wmm-276.herokuapp.com/landing)
 
 #### Run the app locally
 
