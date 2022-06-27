@@ -10,7 +10,6 @@ const CategoriesContainer = () => {
       <summary>
         <h2 className='header'>Categories</h2>
       </summary>
-      {/* add new category block */}
       <CreateCategoryBlock />
       <DeleteCategoryBlock />
       <UpdateCategoryBlock />

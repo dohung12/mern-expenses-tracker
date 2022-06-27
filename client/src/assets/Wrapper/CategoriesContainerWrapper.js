@@ -9,37 +9,27 @@ const Wrapper = styled.details`
   margin-top: 1rem;
   padding: 3rem;
 
+  summary {
+    .header {
+      margin-bottom: 0;
+      display: inline-block;
+    }
+  }
+
   .header {
-    margin-bottom: 0;
-    display: inline-block;
+    margin-bottom: 0.5rem;
   }
 
-  .new-category,
-  .delete-category {
-    .header {
-      margin-bottom: 0.5rem;
-    }
+  form {
+    display: flex;
+    gap: 1rem;
+    flex-direction: column;
 
-    form {
-      display: flex;
-      gap: 1rem;
-    }
-    button {
-      width: auto;
-    }
-  }
-
-  .update-category {
-    .header {
-      margin-bottom: 0.5rem;
-    }
-
-    .new-content {
-      display: flex;
-      gap: 1rem;
-    }
-    button {
-      width: fit-content;
+    @media (min-width: 992px) {
+      flex-direction: row;
+      button {
+        width: auto;
+      }
     }
   }
 `;

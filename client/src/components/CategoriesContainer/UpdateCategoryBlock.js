@@ -41,7 +41,7 @@ const UpdateCategoryBlock = () => {
   };
 
   return (
-    <div className='update-category'>
+    <div>
       <h5 className='header'>Update Category</h5>
       {showAlert && <Alert alertText={alertText} alertType={alertType} />}
 
@@ -56,19 +56,17 @@ const UpdateCategoryBlock = () => {
           })}
         </select>
 
-        <div className='new-content'>
-          <input
-            type='text'
-            value={newTitle}
-            onChange={(e) => {
-              setNewTitle(e.target.value);
-            }}
-            placeholder='Set a new title for category'
-          />
-          <button type='submit' disabled={isLoading} aria-busy={isLoading}>
-            {!isLoading && 'Update'}
-          </button>
-        </div>
+        <input
+          type='text'
+          value={newTitle}
+          onChange={(e) => {
+            setNewTitle(e.target.value);
+          }}
+          placeholder='Set a new title for category'
+        />
+        <button type='submit' disabled={isLoading} aria-busy={isLoading}>
+          {!isLoading && 'Update'}
+        </button>
       </form>
     </div>
   );

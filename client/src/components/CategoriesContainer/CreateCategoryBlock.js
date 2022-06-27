@@ -35,7 +35,7 @@ const CreateCategoryBlock = () => {
   };
 
   return (
-    <div className='new-category'>
+    <div>
       <h5 className='header'>Create new category</h5>
       {showAlert && <Alert alertText={alertText} alertType={alertType} />}
       <form action=''>

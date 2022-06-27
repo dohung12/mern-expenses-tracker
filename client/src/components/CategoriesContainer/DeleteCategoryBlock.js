@@ -35,7 +35,7 @@ const DeleteCategoryBlock = () => {
   };
 
   return (
-    <div className='delete-category'>
+    <div>
       <h5 className='header'>Delete Category</h5>
       {showAlert && <Alert alertText={alertText} alertType={alertType} />}
 
