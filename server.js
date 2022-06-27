@@ -3,7 +3,8 @@ const express = require('express');
 require('express-async-errors');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
-
+const path = require('path');
+const helmet = require('helmet');
 // passport auth
 const passport = require('passport');
 require('./config/passport')(passport);
@@ -30,15 +31,23 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(fileUpload({ useTempFiles: true }));
 app.use(passport.initialize());
+app.use(express.static(path.resolve(__dirname, './client/build')));
+app.use(
+  helmet({
+    contentSecurityPolicy: false,
+  })
+);
 
-// app.use('/', (req, res) => {
-//   res.send('hello world');
-// });
 app.use('/api/v1/auth', authRoutes);
 app.use('/api/v1/expenses', verifyUser, expensesRoutes);
 app.use('/api/v1/user', verifyUser, userRoutes);
 app.use('/api/v1/category', verifyUser, categoryRoutes);
 app.use('/api/v1/uploads', verifyUser, uploadRoutes);
+
+// only when ready to deploy
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, './client/build', 'index.html'));
+});
 
 app.use(notFoundMiddleware);
 
