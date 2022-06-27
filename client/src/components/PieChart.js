@@ -3,7 +3,6 @@ import {
   PieChart,
   Pie,
   ResponsiveContainer,
-  Tooltip,
   Legend,
   Cell,
   Sector,
@@ -120,16 +119,21 @@ const PieChartComponent = ({ data }) => {
           nameKey='category'
           cx='50%'
           cy='50%'
-          innerRadius={80}
+          innerRadius={90}
           outerRadius={150}
           fill='#82ca9d'
           onMouseEnter={onPieEnter}
         >
-          {data.map((entry, index) => (
+          {data.map((_, index) => (
             <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
           ))}
         </Pie>
-        <Legend />
+        <Legend
+          width={200}
+          layout='vertical'
+          verticalAlign='middle'
+          wrapperStyle={{ left: '20px' }}
+        />
       </PieChart>
     </ResponsiveContainer>
   );
